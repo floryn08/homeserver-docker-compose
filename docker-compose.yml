@@ -1,5 +1,34 @@
-version: "2.1"
+version: "3"
 services:
+
+  nginx-proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    environment:
+      DB_MYSQL_HOST: "mariadb"
+      DB_MYSQL_PORT: 3306
+      DB_MYSQL_USER: "npm"
+      DB_MYSQL_PASSWORD: "npm"
+      DB_MYSQL_NAME: "npm"
+    volumes:
+      - /opt/appdata/nginx-proxy-manager:/data
+      - /etc/letsencrypt:/etc/letsencrypt
+  mariadb:
+    image: 'jc21/mariadb-aria:latest'
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 'npm'
+      MYSQL_DATABASE: 'npm'
+      MYSQL_USER: 'npm'
+      MYSQL_PASSWORD: 'npm'
+    volumes:
+      - /opt/appdata/mysql:/var/lib/mysql
 
   jackett:
     image: ghcr.io/linuxserver/jackett
