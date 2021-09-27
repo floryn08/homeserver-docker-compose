@@ -1,26 +1,49 @@
-version: "3.9"
-
-networks:
-  backend:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.30.0.0/16
-          gateway: 172.30.0.1
-
+version: "3"
 services:
 
-  cups:
-    container_name: cups
-    image: unixorn/cupsd:latest
-    ports:
-      - 631:631
-    volumes:
-      - /var/run/dbus:/var/run/dbus
-      - /dev/bus/usb:/dev/bus/usb
-      - /opt/appdata/cups/printers.conf:/etc/cups/printers.conf
-    privileged: true
+#  nginx-proxy-manager:
+#    image: 'jc21/nginx-proxy-manager:latest'
+#    container_name: nginx-proxy-manager
+#    restart: unless-stopped
+#    ports:
+#      - '80:80'
+#      - '81:81'
+#      - '443:443'
+#    environment:
+#      DB_MYSQL_HOST: "mariadb"
+#      DB_MYSQL_PORT: 3306
+#      DB_MYSQL_USER: "npm"
+#      DB_MYSQL_PASSWORD: "npm"
+#      DB_MYSQL_NAME: "npm"
+#    volumes:
+#      - /opt/appdata/nginx-proxy-manager:/data
+#      - /etc/letsencrypt:/etc/letsencrypt
+#  mariadb:
+#    image: 'jc21/mariadb-aria:latest'
+#    container_name: mariadb
+#    restart: unless-stopped
+#    environment:
+#      MYSQL_ROOT_PASSWORD: 'npm'
+#      MYSQL_DATABASE: 'npm'
+#      MYSQL_USER: 'npm'
+#      MYSQL_PASSWORD: 'npm'
+#    volumes:
+#      - /opt/appdata/mysql:/var/lib/mysql
 
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: always
+    user: "1000" 
+      - "3000:3000"
+    volumes:
+      - /opt/appdata/grafana/data:/var/lib/grafana
+      - /opt/appdata/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - /opt/appdata/grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
 
   pihole:
     container_name: pihole
@@ -33,7 +56,6 @@ services:
     environment:
       TZ: 'Europe/Bucharest'
       WEBPASSWORD: 'parola123'
-      PIHOLE_DNS_: 1.1.1.1
     # Volumes store your data between container upgrades
     volumes:
       - /opt/appdata/pihole/etc-pihole/:/etc/pihole/
@@ -43,23 +65,19 @@ services:
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
-    networks:
-      backend:
-        ipv4_address: 172.30.0.2      
     
   wireguard:
-    dns: 172.30.0.2
     environment:
       # ⚠️ Required:
       # Change this to your host's public address
-      - WG_HOST=thebatcave.go.ro
+      - WG_HOST=192.168.0.150
 
       # Optional:
       # - PASSWORD=foobar123
       # - WG_PORT=51820
       # - WG_DEFAULT_ADDRESS=10.8.0.x
-      - WG_DEFAULT_DNS=172.30.0.2
-      # - WG_ALLOWED_IPS=192.168.0.0/24, 0.0.0.0/0, ::/0
+      - WG_DEFAULT_DNS=192.168.0.150
+      # - WG_ALLOWED_IPS=192.168.15.0/24, 10.0.1.0/24
       
     image: weejewel/wg-easy
     container_name: wireguard
@@ -75,8 +93,6 @@ services:
     sysctls:
       - net.ipv4.ip_forward=1
       - net.ipv4.conf.all.src_valid_mark=1
-    networks:
-      - backend
 
   jackett:
     image: ghcr.io/linuxserver/jackett
@@ -102,7 +118,7 @@ services:
       - PGID=1000
       - TZ=Europe/Bucharest
     volumes:
-      - /home/pi/ssl:/config/keys
+      - /home:/config/keys
       - /opt/appdata/nextcloud:/config
       - /mnt/hdd2:/data
     ports:
@@ -122,7 +138,7 @@ services:
       - /mnt/hdd/tv:/data/tvshows
       - /mnt/hdd/movies:/data/movies
       - /mnt/hdd/anime:/data/anime
-      - /home/pi/ssl:/ssl
+      - /home:/ssl
 #     - /opt/vc/lib:/opt/vc/lib #optional
     ports:
       - 8096:8096
@@ -212,6 +228,20 @@ services:
       - /mnt/hdd/downloads:/downloads
     restart: unless-stopped
 
+#  nzbget:
+#    image: ghcr.io/linuxserver/nzbget
+#    container_name: nzbget
+#    environment:
+#      - PUID=1000
+#      - PGID=1000
+#      - TZ=Europe/Bucharest
+#    volumes:
+#      - /opt/appdata/nzbget:/config
+#      - /mnt/hdd/downloads:/downloads
+#    ports:
+#      - 6789:6789
+#    restart: unless-stopped
+  
   grocy:
     image: ghcr.io/linuxserver/grocy
     container_name: grocy
