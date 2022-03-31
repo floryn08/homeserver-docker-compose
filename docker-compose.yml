@@ -103,10 +103,10 @@ services:
       - "8080:80/tcp"
     environment:
       TZ: 'Europe/Bucharest'
-      WEBPASSWORD: 'parola123'
+      WEBPASSWORD: ${PIHOLE_PASSWORD}
       PIHOLE_DNS_: 1.1.1.1
-      ServerIP: 192.168.0.150
-      ServerIPv6: fe80::ab19:fa69:27c:e117
+      ServerIP: ${LOCAL_IP}
+      #ServerIPv6: fe80::ab19:fa69:27c:e117
     # Volumes store your data between container upgrades
     volumes:
       - /opt/appdata/pihole/etc-pihole/:/etc/pihole/
@@ -128,7 +128,7 @@ services:
     environment:
       # ⚠️ Required:
       # Change this to your host's public address
-      - WG_HOST=thebatcave.go.ro
+      - WG_HOST=${DOMAIN}
 
       # Optional:
       # - PASSWORD=foobar123
@@ -199,7 +199,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Bucharest
-      - JELLYFIN_PublishedServerUrl=192.168.0.150 #optional
+      - JELLYFIN_PublishedServerUrl=${LOCAL_IP} #optional
     volumes:
       - /opt/appdata/jellyfin:/config
       - /mnt/hdd/tv:/data/tvshows
