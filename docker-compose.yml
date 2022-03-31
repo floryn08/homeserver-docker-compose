@@ -1,17 +1,85 @@
 version: "3.9"
 
 networks:
-  backend:
-    name: "backend"
+  services:
+    name: "services"
+    #enable_ipv6: true
     driver: bridge
+    #driver_opts:
+      #com.docker.network.enable_ipv6: "true"
     ipam:
       config:
         - subnet: 172.30.0.0/16
           gateway: 172.30.0.1
+        #- subnet: 2001:3984:3989::/64
+        #  gateway: 2001:3984:3989::1
 
 services:
 
-  cups:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati
+    container_name: duplicati
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Bucharest
+      - CLI_ARGS= #optional
+    volumes:
+      - /opt/appdata/duplicati:/config
+      - /mnt/hdd2/backups:/backups
+      - /home/pi:/source
+      - /opt/appdata:/docker-appdata
+    ports:
+      - 8200:8200
+    restart: unless-stopped
+
+#  calibre-web:
+#    image: lscr.io/linuxserver/calibre-web
+#    container_name: calibre-web
+#    environment:
+#      - PUID=1000
+#      - PGID=1000
+#      - TZ=Europe/Bucharest
+#      - DOCKER_MODS=linuxserver/calibre-web:calibre #optional
+#      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+#    volumes:
+#      - /opt/appdata/calibre-web:/config
+#      - /mnt/hdd:/media
+#    ports:
+#      - 8083:8083
+#    restart: unless-stopped
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:nightly
+    container_name: readarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Bucharest
+    volumes:
+      - /opt/appdata/readarr:/config
+      - /mnt/hdd:/media #optional
+#      - /path/to/downloadclient-downloads:/downloads #optional
+    ports:
+      - 8787:8787
+    restart: unless-stopped
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Bucharest
+    volumes:
+      - /opt/appdata/lidarr:/config
+      - /mnt/hdd:/media #optional
+#      - /mnt/hdd/downloads:/downloads #optional
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+
+  cups: # usre: print & pass: print
     container_name: cups
     image: unixorn/cupsd:latest
     ports:
@@ -21,7 +89,9 @@ services:
       - /dev/bus/usb:/dev/bus/usb
       - /opt/appdata/cups/printers.conf:/etc/cups/printers.conf
     privileged: true
-
+    restart: unless-stopped
+    networks:
+      - services
 
   pihole:
     container_name: pihole
@@ -30,11 +100,13 @@ services:
       - "53:53/tcp"
       - "53:53/udp"
       - "67:67/udp"
-      - "8081:80/tcp"
+      - "8080:80/tcp"
     environment:
       TZ: 'Europe/Bucharest'
       WEBPASSWORD: 'parola123'
       PIHOLE_DNS_: 1.1.1.1
+      ServerIP: 192.168.0.150
+      ServerIPv6: fe80::ab19:fa69:27c:e117
     # Volumes store your data between container upgrades
     volumes:
       - /opt/appdata/pihole/etc-pihole/:/etc/pihole/
@@ -44,12 +116,15 @@ services:
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
     networks:
-      backend:
-        ipv4_address: 172.30.0.2      
+      services:
+        ipv4_address: 172.30.0.100      
     
   wireguard:
-    dns: 172.30.0.2
+    dns: 172.30.0.100
     environment:
       # ⚠️ Required:
       # Change this to your host's public address
@@ -59,7 +134,7 @@ services:
       # - PASSWORD=foobar123
       # - WG_PORT=51820
       # - WG_DEFAULT_ADDRESS=10.8.0.x
-      - WG_DEFAULT_DNS=172.30.0.2
+      - WG_DEFAULT_DNS=172.30.0.100
       # - WG_ALLOWED_IPS=192.168.0.0/24, 0.0.0.0/0, ::/0
       
     image: weejewel/wg-easy
@@ -79,7 +154,7 @@ services:
     depends_on:
       - pihole
     networks:
-      - backend
+      - services
 
   jackett:
     image: ghcr.io/linuxserver/jackett
@@ -96,6 +171,8 @@ services:
     ports:
       - 9117:9117
     restart: unless-stopped
+    networks:
+      - services
 
   nextcloud:
     image: ghcr.io/linuxserver/nextcloud
@@ -107,10 +184,13 @@ services:
     volumes:
       - /home/pi/ssl:/config/keys
       - /opt/appdata/nextcloud:/config
-      - /mnt/hdd2:/data
+      - /mnt/hdd2/nextcloud:/data
     ports:
-      - 1101:80
+      - 1102:80
+      - 1101:443
     restart: unless-stopped
+    networks:
+      - services
 
   jellyfin:
     image: ghcr.io/linuxserver/jellyfin
@@ -125,6 +205,7 @@ services:
       - /mnt/hdd/tv:/data/tvshows
       - /mnt/hdd/movies:/data/movies
       - /mnt/hdd/anime:/data/anime
+      - /mnt/hdd/music:/data/music
       - /home/pi/ssl:/ssl
 #     - /opt/vc/lib:/opt/vc/lib #optional
     ports:
@@ -140,6 +221,8 @@ services:
       - /dev/video11:/dev/video11 #optional
       - /dev/video12:/dev/video12 #optional
     restart: unless-stopped
+    networks:
+      - services
 
   bazarr:
     image: ghcr.io/linuxserver/bazarr
@@ -152,9 +235,12 @@ services:
       - /opt/appdata/bazarr:/config
       - /mnt/hdd/movies:/movies
       - /mnt/hdd/tv:/tv
+      - /mnt/hdd/anime:/anime
     ports:
       - 6767:6767
     restart: unless-stopped
+    networks:
+      - services
 
   sonarr:
     image: ghcr.io/linuxserver/sonarr
@@ -172,6 +258,8 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+    networks:
+      - services
 
   radarr:
     image: ghcr.io/linuxserver/radarr
@@ -188,19 +276,21 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
+    networks:
+      - services
 
-  homeassistant:
-    image: ghcr.io/linuxserver/homeassistant
-    container_name: homeassistant
-    network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Bucharest
-    volumes:
-      - /opt/appdata/homeassistant:/config
-    restart: unless-stopped
-
+#  homeassistant:
+#    image: ghcr.io/linuxserver/homeassistant
+#    container_name: homeassistant
+#    network_mode: host
+#    environment:
+#      - PUID=1000
+#      - PGID=1000
+#      - TZ=Europe/Bucharest
+#    volumes:
+#      - /opt/appdata/homeassistant:/config
+#    restart: unless-stopped
+#
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
@@ -227,3 +317,5 @@ services:
     ports:
       - 9283:80
     restart: unless-stopped
+    networks:
+      - services
