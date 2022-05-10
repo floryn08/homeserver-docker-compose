@@ -16,6 +16,20 @@ networks:
 
 services:
 
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    volumes:
+      - /opt/appdata/filebrowser/filebrowser.db:/database/filebrowser.db
+      - /:/srv
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Bucharest
+    ports:
+      - 8888:80
+    restart: unless-stopped
+
   duplicati:
     image: lscr.io/linuxserver/duplicati
     container_name: duplicati
