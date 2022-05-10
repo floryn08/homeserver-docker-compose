@@ -21,7 +21,7 @@ services:
     container_name: filebrowser
     volumes:
       - /opt/appdata/filebrowser/filebrowser.db:/database/filebrowser.db
-      - /:/srv
+      - /mnt:/srv
     environment:
       - PUID=1000
       - PGID=1000
