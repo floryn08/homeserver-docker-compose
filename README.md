@@ -1,0 +1,17 @@
+# homeserver-rpi-docker-compose
+## Services:
+- filebrowser
+- duplicati
+- readarr
+- lidarr
+- cups
+- pihole
+- wireguard
+- jackett
+- nextcloud
+- jellyfin
+- bazarr
+- sonarr
+- radarr
+- deluge
+- grocy
