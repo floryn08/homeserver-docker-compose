@@ -1,4 +1,4 @@
-# homeserver-rpi-docker-compose
+# homeserver-docker-compose
 ## Services:
 - filebrowser
 - duplicati
