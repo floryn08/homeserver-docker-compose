@@ -31,7 +31,8 @@ services:
     restart: unless-stopped
 
   duplicati:
-    image: lscr.io/linuxserver/duplicati
+    #image: lscr.io/linuxserver/duplicati
+    image: duplicati/duplicati
     container_name: duplicati
     environment:
       - PUID=1000
@@ -39,10 +40,11 @@ services:
       - TZ=Europe/Bucharest
       - CLI_ARGS= #optional
     volumes:
-      - /opt/appdata/duplicati:/config
+      - /opt/appdata/duplicati2:/data
       - /mnt/hdd2/backups:/backups
       - /home/pi:/source
       - /opt/appdata:/docker-appdata
+      - /mnt/hdd2/nextcloud/floryn08/files/InstantUpload/Camera:/mnt/hdd2/nextcloud/floryn08/files/InstantUpload/Camera
     ports:
       - 8200:8200
     restart: unless-stopped
@@ -98,6 +100,9 @@ services:
     image: unixorn/cupsd:latest
     ports:
       - 631:631
+    environment:
+      - PUID=1000
+      - PGID=1000
     volumes:
       - /var/run/dbus:/var/run/dbus
       - /dev/bus/usb:/dev/bus/usb
@@ -221,6 +226,7 @@ services:
       - /mnt/hdd/anime:/data/anime
       - /mnt/hdd/music:/data/music
       - /home/pi/ssl:/ssl
+      - /opt/appdata/jellyfin-plugins:/jellyfin/jellyfin-web:ro
 #     - /opt/vc/lib:/opt/vc/lib #optional
     ports:
       - 8096:8096
@@ -257,7 +263,7 @@ services:
       - services
 
   sonarr:
-    image: ghcr.io/linuxserver/sonarr
+    image: ghcr.io/linuxserver/sonarr:3.0.8.1507-ls143
     container_name: sonarr
     environment:
       - PUID=1000
