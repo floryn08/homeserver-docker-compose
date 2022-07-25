@@ -49,21 +49,6 @@ services:
       - 8200:8200
     restart: unless-stopped
 
-#  calibre-web:
-#    image: lscr.io/linuxserver/calibre-web
-#    container_name: calibre-web
-#    environment:
-#      - PUID=1000
-#      - PGID=1000
-#      - TZ=Europe/Bucharest
-#      - DOCKER_MODS=linuxserver/calibre-web:calibre #optional
-#      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
-#    volumes:
-#      - /opt/appdata/calibre-web:/config
-#      - /mnt/hdd:/media
-#    ports:
-#      - 8083:8083
-#    restart: unless-stopped
 
   readarr:
     image: lscr.io/linuxserver/readarr:nightly
@@ -271,9 +256,6 @@ services:
       - TZ=Europe/Bucharest
     volumes:
       - /opt/appdata/sonarr:/config
-#      - /mnt/hdd/tv:/tv
-#      - /mnt/hdd/downloads:/mnt/hdd/downloads
-#      - /mnt/hdd/anime:/anime
       - /mnt/hdd:/media
     ports:
       - 8989:8989
@@ -290,8 +272,6 @@ services:
       - TZ=Europe/Bucharest
     volumes:
       - /opt/appdata/radarr:/config
-#      - /mnt/hdd/movies:/movies
-#      - /mnt/hdd/downloads:/mnt/hdd/downloads
       - /mnt/hdd:/media
     ports:
       - 7878:7878
@@ -299,18 +279,6 @@ services:
     networks:
       - services
 
-#  homeassistant:
-#    image: ghcr.io/linuxserver/homeassistant
-#    container_name: homeassistant
-#    network_mode: host
-#    environment:
-#      - PUID=1000
-#      - PGID=1000
-#      - TZ=Europe/Bucharest
-#    volumes:
-#      - /opt/appdata/homeassistant:/config
-#    restart: unless-stopped
-#
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
