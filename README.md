@@ -4,6 +4,7 @@
 3. Run `docker-compose up -d`
 
 ## Services:
+- vaultwarden
 - filebrowser
 - duplicati
 - readarr
