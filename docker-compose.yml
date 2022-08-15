@@ -1,20 +1,36 @@
 version: "3.9"
 
 networks:
+  website_bridge_network:
+    external: true
   services:
     name: "services"
-    #enable_ipv6: true
     driver: bridge
-    #driver_opts:
-      #com.docker.network.enable_ipv6: "true"
     ipam:
       config:
         - subnet: 172.30.0.0/16
           gateway: 172.30.0.1
-        #- subnet: 2001:3984:3989::/64
-        #  gateway: 2001:3984:3989::1
 
 services:
+
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      - WEBSOCKET_ENABLED=true
+      - SIGNUPS_ALLOWED=false
+      - DOMAIN=https://${DOMAIN}/vault/
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_FROM=${SMTP_EMAIL}
+      - SMTP_PORT=587
+      - SMTP_SSL=true
+      - SMTP_USERNAME=${SMTP_EMAIL}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+    volumes:
+      - /opt/appdata/vaultwarden/data:/data
+    networks:
+      - website_bridge_network
 
   filebrowser:
     image: filebrowser/filebrowser
@@ -31,7 +47,6 @@ services:
     restart: unless-stopped
 
   duplicati:
-    #image: lscr.io/linuxserver/duplicati
     image: duplicati/duplicati
     container_name: duplicati
     environment:
@@ -49,7 +64,6 @@ services:
       - 8200:8200
     restart: unless-stopped
 
-
   readarr:
     image: lscr.io/linuxserver/readarr:nightly
     container_name: readarr
@@ -60,7 +74,6 @@ services:
     volumes:
       - /opt/appdata/readarr:/config
       - /mnt/hdd:/media #optional
-#      - /path/to/downloadclient-downloads:/downloads #optional
     ports:
       - 8787:8787
     restart: unless-stopped
@@ -75,12 +88,11 @@ services:
     volumes:
       - /opt/appdata/lidarr:/config
       - /mnt/hdd:/media #optional
-#      - /mnt/hdd/downloads:/downloads #optional
     ports:
       - 8686:8686
     restart: unless-stopped
 
-  cups: # usre: print & pass: print
+  cups: # user: print & pass: print
     container_name: cups
     image: unixorn/cupsd:latest
     ports:
@@ -110,13 +122,9 @@ services:
       WEBPASSWORD: ${PIHOLE_PASSWORD}
       PIHOLE_DNS_: 1.1.1.1
       ServerIP: ${LOCAL_IP}
-      #ServerIPv6: fe80::ab19:fa69:27c:e117
-    # Volumes store your data between container upgrades
     volumes:
       - /opt/appdata/pihole/etc-pihole/:/etc/pihole/
       - /opt/appdata/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/
-    # Recommended but not required (DHCP needs NET_ADMIN)
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
@@ -125,20 +133,17 @@ services:
       - 1.1.1.1
     networks:
       services:
-        ipv4_address: 172.30.0.100      
+        ipv4_address: 172.30.0.100 # static ip address  
     
   wireguard:
-    dns: 172.30.0.100
+    dns: 172.30.0.100 # ip address of pihole from above
     environment:
-      # ⚠️ Required:
-      # Change this to your host's public address
       - WG_HOST=${DOMAIN}
-
       # Optional:
       # - PASSWORD=foobar123
       # - WG_PORT=51820
       # - WG_DEFAULT_ADDRESS=10.8.0.x
-      - WG_DEFAULT_DNS=172.30.0.100
+      - WG_DEFAULT_DNS=172.30.0.100 # ip address of pihole from above
       # - WG_ALLOWED_IPS=192.168.0.0/24, 0.0.0.0/0, ::/0
       
     image: weejewel/wg-easy
