@@ -1,7 +1,7 @@
 version: "3.9"
 
 networks:
-  website_bridge_network:
+  nginx-network:
     external: true
   services:
     name: "services"
@@ -27,10 +27,11 @@ services:
       - SMTP_SSL=true
       - SMTP_USERNAME=${SMTP_EMAIL}
       - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - ADMIN_TOKEN=some_random_token_as_per_above_explanation
     volumes:
       - /opt/appdata/vaultwarden/data:/data
     networks:
-      - website_bridge_network
+      - nginx-network
 
   filebrowser:
     image: filebrowser/filebrowser
@@ -200,9 +201,10 @@ services:
     restart: unless-stopped
     networks:
       - services
+      - nginx-network
 
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin
+    image: ghcr.io/linuxserver/jellyfin:10.8.4
     container_name: jellyfin
     environment:
       - PUID=1000
@@ -233,6 +235,7 @@ services:
     restart: unless-stopped
     networks:
       - services
+      - nginx-network
 
   bazarr:
     image: ghcr.io/linuxserver/bazarr
