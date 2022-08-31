@@ -27,7 +27,7 @@ services:
       - SMTP_SSL=true
       - SMTP_USERNAME=${SMTP_EMAIL}
       - SMTP_PASSWORD=${SMTP_PASSWORD}
-      - ADMIN_TOKEN=some_random_token_as_per_above_explanation
+      - ADMIN_TOKEN=${ADMIN_TOKEN}
     volumes:
       - /opt/appdata/vaultwarden/data:/data
     networks:
