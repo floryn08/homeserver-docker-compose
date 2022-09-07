@@ -3,6 +3,8 @@ version: "3.9"
 networks:
   home-automation-network:
     external: true
+  nginx-network:
+    external: true
 
 services:
 

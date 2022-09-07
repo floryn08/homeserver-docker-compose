@@ -1,7 +1,9 @@
 # homeserver-docker-compose
-1. Rename .env.example to .env
+1. Rename `.env.example` to `.env`
 2. Configure your env variables
-3. Run `docker-compose up -d` for module you want running
+3. Running the modules
+   1. From project root run `docker-compose --env-file .env -f /module-name/docker-compose.yaml up -d` for the module you want running
+   2. Run symlink script to link `.env` file to inside the modules folders
 
 
 ## Networks:

@@ -107,7 +107,9 @@ services:
   deluge:
     image: ghcr.io/linuxserver/deluge
     container_name: deluge
-    network_mode: host
+    # network_mode: host
+    ports:
+      - 8112:8112
     environment:
       - PUID=1000
       - PGID=1000
@@ -140,13 +142,13 @@ services:
       - 8920:8920 #optional
       - 7359:7359/udp #optional
     # - 1900:1900/udp #optional
-    devices:
-      - /dev/dri:/dev/dri #optional
-      - /dev/vcsm-cma:/dev/vcsm-cma #optional
-      - /dev/vchiq:/dev/vchiq #optional
-      - /dev/video10:/dev/video10 #optional
-      - /dev/video11:/dev/video11 #optional
-      - /dev/video12:/dev/video12 #optional
+    # devices:
+      # - /dev/dri:/dev/dri #optional
+      # - /dev/vcsm-cma:/dev/vcsm-cma #optional
+      # - /dev/vchiq:/dev/vchiq #optional
+      # - /dev/video10:/dev/video10 #optional
+      # - /dev/video11:/dev/video11 #optional
+      # - /dev/video12:/dev/video12 #optional
     restart: unless-stopped
     networks:
       - media-management-network

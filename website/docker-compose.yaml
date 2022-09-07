@@ -1,8 +1,9 @@
 version: '3.9'
+
 networks:
-  nginx-network:
-    external: true
   db-network:
+    external: true
+  nginx-network:
     external: true
 
 services:
@@ -28,3 +29,4 @@ services:
       #NODE_ENV: development
     networks:
       - db-network
+      - nginx-network
