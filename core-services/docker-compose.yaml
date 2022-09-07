@@ -1,0 +1,125 @@
+version: "3.9"
+
+networks:
+  nginx-network:
+    external: true
+  db-network:
+    external: true
+
+services:
+
+  swag:
+    image: lscr.io/linuxserver/swag:1.29.0
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - URL=${DOMAIN}
+      - VALIDATION=http
+    volumes:
+      - ${VOLUMES_PATH}/core-services/swag/config:/config
+    ports:
+      - 443:443
+      - 80:80
+    networks:
+      - nginx-network
+    restart: unless-stopped
+
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=${TIMEZONE}
+      #- MYSQL_DATABASE=${MYSQL_DATABASE} #optional
+      #- MYSQL_USER=${MYSQL_USER} #optional
+      #- MYSQL_PASSWORD=${MYSQL_PASSWORD} #optional
+      #- REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql #optional
+    volumes:
+      - ${VOLUMES_PATH}/core-services/mariadb/config:/config
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+    networks:
+      - db-network
+
+  duplicati:
+    image: duplicati/duplicati
+    container_name: duplicati
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - CLI_ARGS= #optional
+    volumes:
+      - ${VOLUMES_PATH}/core-services/duplicati:/data
+      # - /mnt/hdd2/backups:/backups
+      # - /home/pi:/source
+      # - /opt/appdata:/docker-appdata
+      # - /mnt/hdd2/nextcloud/floryn08/files/InstantUpload/Camera:/mnt/hdd2/nextcloud/floryn08/files/InstantUpload/Camera
+    ports:
+      - 8200:8200
+    restart: unless-stopped
+
+  mqtt:
+    container_name: mqtt
+    restart: unless-stopped
+    image: eclipse-mosquitto
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ${VOLUMES_PATH}/core-services/mqtt/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ${VOLUMES_PATH}/core-services/mqtt/data:/mosquitto/data
+      - ${VOLUMES_PATH}/core-services/mqtt/log:/mosquitto/log
+
+  filebrowser:
+    image: filebrowser/filebrowser
+    container_name: filebrowser
+    volumes:
+      - ${VOLUMES_PATH}/core-services/filebrowser/filebrowser.db:/database/filebrowser.db
+      # - /mnt:/srv
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    ports:
+      - 8888:80
+    restart: unless-stopped
+
+  ddclient:
+    image: lscr.io/linuxserver/ddclient:latest
+    container_name: ddclient
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${VOLUMES_PATH}/core-services/ddclient:/config
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: lscr.io/linuxserver/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - PMA_ARBITRARY=1 #optional
+      #- PMA_ABSOLUTE_URI=https://phpmyadmin.example.com #optional
+    volumes:
+      - ${VOLUMES_PATH}/core-services/phpmyadmin/config:/config
+    ports:
+      - 8082:80
+    restart: unless-stopped
+    networks:
+      - db-network

@@ -1,0 +1,172 @@
+version: "3.9"
+
+networks:
+  nginx-network:
+    external: true
+  media-management-network:
+    external: true
+
+services:
+
+  sonarr:
+    image: ghcr.io/linuxserver/sonarr:3.0.8.1507-ls143
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${VOLUMES_PATH}/media-management/sonarr:/config
+      - ${MEDIA_HDD_PATH}:/media
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+    networks:
+      - media-management-network
+
+  radarr:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${VOLUMES_PATH}/media-management/radarr:/config
+      - ${MEDIA_HDD_PATH}:/media
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+    networks:
+      - media-management-network
+
+  bazarr:
+    image: ghcr.io/linuxserver/bazarr
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${VOLUMES_PATH}/media-management/bazarr:/config
+      - ${MEDIA_HDD_PATH}/movies:/movies
+      - ${MEDIA_HDD_PATH}/tv:/tv
+      - ${MEDIA_HDD_PATH}/anime:/anime
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+    networks:
+      - media-management-network
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${VOLUMES_PATH}/media-management/lidarr:/config
+      - ${MEDIA_HDD_PATH}:/media #optional
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+
+  readarr:
+    image: lscr.io/linuxserver/readarr:nightly
+    container_name: readarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${VOLUMES_PATH}/media-management/readarr:/config
+      - ${MEDIA_HDD_PATH}:/media #optional
+    ports:
+      - 8787:8787
+    restart: unless-stopped
+
+  jackett:
+    image: ghcr.io/linuxserver/jackett
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - AUTO_UPDATE=true #optional
+      # - RUN_OPTS=<run options here> #optional
+    volumes:
+      - ${VOLUMES_PATH}/media-management/jackett:/config
+      - ${MEDIA_HDD_PATH}/downloads:/downloads
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+    networks:
+      - media-management-network
+
+  deluge:
+    image: ghcr.io/linuxserver/deluge
+    container_name: deluge
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - DELUGE_LOGLEVEL=error #optional
+    volumes:
+      - ${VOLUMES_PATH}/media-management/deluge:/config
+      - ${MEDIA_HDD_PATH}/downloads:/downloads
+    restart: unless-stopped
+
+  jellyfin:
+    image: ghcr.io/linuxserver/jellyfin:10.8.4
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - JELLYFIN_PublishedServerUrl=${LOCAL_IP} #optional
+    volumes:
+      - ${VOLUMES_PATH}/media-management/jellyfin:/config
+      - ${MEDIA_HDD_PATH}/tv:/data/tvshows
+      - ${MEDIA_HDD_PATH}/movies:/data/movies
+      - ${MEDIA_HDD_PATH}/anime:/data/anime
+      - ${MEDIA_HDD_PATH}/music:/data/music
+      # - /home/pi/ssl:/ssl
+      # - ${VOLUMES_PATH}/media-management/jellyfin-plugins:/jellyfin/jellyfin-web:ro
+    # - /opt/vc/lib:/opt/vc/lib #optional
+    ports:
+      - 8096:8096
+      - 8920:8920 #optional
+      - 7359:7359/udp #optional
+    # - 1900:1900/udp #optional
+    devices:
+      - /dev/dri:/dev/dri #optional
+      - /dev/vcsm-cma:/dev/vcsm-cma #optional
+      - /dev/vchiq:/dev/vchiq #optional
+      - /dev/video10:/dev/video10 #optional
+      - /dev/video11:/dev/video11 #optional
+      - /dev/video12:/dev/video12 #optional
+    restart: unless-stopped
+    networks:
+      - media-management-network
+      - nginx-network
+
+  nextcloud:
+    image: ghcr.io/linuxserver/nextcloud
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      # - /home/pi/ssl:/config/keys
+      - ${VOLUMES_PATH}/media-management/nextcloud:/config
+      - ${BACKUP_HDD_PATH}/nextcloud:/data
+    ports:
+      - 1102:80
+      - 1101:443
+    restart: unless-stopped
+    networks:
+      - media-management-network
+      - nginx-network
