@@ -14,7 +14,7 @@ networks:
 services:
 
   vaultwarden:
-    image: vaultwarden/server:latest
+    image: vaultwarden/server:1.25.2
     container_name: vaultwarden
     restart: unless-stopped
     environment:
@@ -315,3 +315,4 @@ services:
     restart: unless-stopped
     networks:
       - services
+      - nginx-network
