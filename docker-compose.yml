@@ -37,7 +37,7 @@ services:
     image: filebrowser/filebrowser
     container_name: filebrowser
     volumes:
-      - /opt/appdata/filebrowser/filebrowser.db:/database/filebrowser.db
+      - /opt/appdata/filebrowser/database.db:/database.db
       - /mnt:/srv
     environment:
       - PUID=1000
@@ -112,7 +112,7 @@ services:
 
   pihole:
     container_name: pihole
-    image: pihole/pihole:latest
+    image: pihole/pihole:2022.09.4
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -185,7 +185,7 @@ services:
       - services
 
   nextcloud:
-    image: ghcr.io/linuxserver/nextcloud
+    image: ghcr.io/linuxserver/nextcloud:24.0.5
     container_name: nextcloud
     environment:
       - PUID=1000
@@ -204,7 +204,7 @@ services:
       - nginx-network
 
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin:10.8.4
+    image: ghcr.io/linuxserver/jellyfin:10.8.5
     container_name: jellyfin
     environment:
       - PUID=1000
@@ -233,6 +233,8 @@ services:
       - /dev/video11:/dev/video11 #optional
       - /dev/video12:/dev/video12 #optional
     restart: unless-stopped
+    group_add:
+      - 44
     networks:
       - services
       - nginx-network
@@ -272,7 +274,7 @@ services:
       - services
 
   radarr:
-    image: ghcr.io/linuxserver/radarr
+    image: ghcr.io/linuxserver/radarr:4.2.4
     container_name: radarr
     environment:
       - PUID=1000
