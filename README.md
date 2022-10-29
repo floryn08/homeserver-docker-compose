@@ -46,3 +46,8 @@
 - Cinema crawler - TBD
   - Backend - java
   - Frontend - angular
+
+
+## TODO
+- [ ] make docker-compose commands ease to run
+- [ ] test portainer?
