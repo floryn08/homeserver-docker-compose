@@ -25,7 +25,7 @@ services:
       - media-management-network
 
   radarr:
-    image: ghcr.io/linuxserver/radarr
+    image: ghcr.io/linuxserver/radarr:4.2.4
     container_name: radarr
     environment:
       - PUID=1000
@@ -121,7 +121,7 @@ services:
     restart: unless-stopped
 
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin:10.8.4
+    image: ghcr.io/linuxserver/jellyfin:10.8.6
     container_name: jellyfin
     environment:
       - PUID=1000
@@ -155,7 +155,7 @@ services:
       - nginx-network
 
   nextcloud:
-    image: ghcr.io/linuxserver/nextcloud
+    image: ghcr.io/linuxserver/nextcloud:24.0.5
     container_name: nextcloud
     environment:
       - PUID=1000

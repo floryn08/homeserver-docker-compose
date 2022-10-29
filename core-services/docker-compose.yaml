@@ -86,7 +86,7 @@ services:
     image: filebrowser/filebrowser
     container_name: filebrowser
     volumes:
-      - ${VOLUMES_PATH}/core-services/filebrowser/filebrowser.db:/database/filebrowser.db
+      - ${VOLUMES_PATH}/core-services/filebrowser/database.db:/database.db
       # - /mnt:/srv
     environment:
       - PUID=1000
