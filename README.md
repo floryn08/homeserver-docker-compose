@@ -49,5 +49,5 @@
 
 
 ## TODO
-- [ ] make docker-compose commands ease to run
+- [ ] make docker-compose commands ease to run, maybe with makefile?
 - [ ] test portainer?
