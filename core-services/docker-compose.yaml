@@ -87,7 +87,7 @@ services:
     container_name: filebrowser
     volumes:
       - ${VOLUMES_PATH}/core-services/filebrowser/database.db:/database.db
-      # - /mnt:/srv
+      - /mnt:/srv
     environment:
       - PUID=1000
       - PGID=1000
