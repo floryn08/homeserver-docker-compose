@@ -1,0 +1,106 @@
+version: "3.9"
+
+networks:
+  nginx-network:
+    external: true
+  services:
+    name: "services"
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
+          gateway: 172.30.0.1
+
+services:
+
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:2022.09.4
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "8080:80/tcp"
+    environment:
+      TZ: ${TIMEZONE}
+      WEBPASSWORD: ${PIHOLE_PASSWORD}
+      PIHOLE_DNS_: 1.1.1.1
+      ServerIP: ${LOCAL_IP}
+    volumes:
+      - ${VOLUMES_PATH}/utility-services/pihole/etc-pihole/:/etc/pihole/
+      - ${VOLUMES_PATH}/utility-services/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
+    networks:
+      services:
+        ipv4_address: 172.30.0.100 # static ip address  
+
+  wireguard:
+    dns: 172.30.0.100 # ip address of pihole from above
+    environment:
+      - WG_HOST=${DOMAIN}
+      # Optional:
+      # - PASSWORD=foobar123
+      # - WG_PORT=51820
+      # - WG_DEFAULT_ADDRESS=10.8.0.x
+      - WG_DEFAULT_DNS=172.30.0.100 # ip address of pihole from above
+      # - WG_ALLOWED_IPS=192.168.0.0/24, 0.0.0.0/0, ::/0
+
+    image: weejewel/wg-easy
+    container_name: wireguard
+    volumes:
+      - ${VOLUMES_PATH}/utility-services/wireguard:/etc/wireguard
+    ports:
+      - "51820:51820/udp"
+      - "51821:51821/tcp"
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
+    depends_on:
+      - pihole
+    networks:
+      - services
+
+  vaultwarden:
+    image: vaultwarden/server:1.25.2
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      - WEBSOCKET_ENABLED=true
+      - SIGNUPS_ALLOWED=false
+      - DOMAIN=https://${DOMAIN}/vault/
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_FROM=${SMTP_EMAIL}
+      - SMTP_PORT=587
+      - SMTP_SSL=true
+      - SMTP_USERNAME=${SMTP_EMAIL}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - ADMIN_TOKEN=${ADMIN_TOKEN}
+    volumes:
+      - ${VOLUMES_PATH}/utility-services/vaultwarden/data:/data
+    networks:
+      - nginx-network
+
+  cups:
+    # user: print & pass: print
+    container_name: cups
+    image: unixorn/cupsd:latest
+    ports:
+      - 631:631
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      # - /var/run/dbus:/var/run/dbus
+      # - /dev/bus/usb:/dev/bus/usb
+      - ${VOLUMES_PATH}/utility-services/cups/printers.conf:/etc/cups/printers.conf
+    privileged: true
+    restart: unless-stopped

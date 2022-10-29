@@ -1,0 +1,41 @@
+version: "3.9"
+
+networks:
+  home-automation-network:
+    external: true
+  nginx-network:
+    external: true
+
+services:
+
+  homeassistant:
+    container_name: homeassistant
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    ports:
+      - "8123:8123"
+    volumes:
+      - ${VOLUMES_PATH}/home-automation/homeassistant:/config
+      # - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    privileged: true
+    #network_mode: host
+
+  grocy:
+    image: ghcr.io/linuxserver/grocy
+    container_name: grocy
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${VOLUMES_PATH}/home-automation/grocy:/config
+    ports:
+      - 9283:80
+    restart: unless-stopped
+    networks:
+      - home-automation-network
+      - nginx-network
