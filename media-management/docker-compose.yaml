@@ -9,7 +9,7 @@ networks:
 services:
 
   sonarr:
-    image: ghcr.io/linuxserver/sonarr:3.0.8.1507-ls143
+    image: ghcr.io/linuxserver/sonarr:3.0.9
     container_name: sonarr
     environment:
       - PUID=1000
