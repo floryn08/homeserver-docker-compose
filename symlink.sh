@@ -1,6 +1,12 @@
 #!/bin/bash
 
 for d in */; do
+
     echo "$d"
-    ln .env $d
+
+    if [[ -f $d/.env ]]; then
+        rm $d/.env
+    fi
+
+    cp .env $d
 done
