@@ -5,6 +5,8 @@ networks:
     external: true
   nginx-network:
     external: true
+  mqtt-network:
+    external: true
 
 services:
 
@@ -25,7 +27,7 @@ services:
     #network_mode: host
     networks:
       - home-automation-network
-      - nginx-network
+      - mqtt-network
 
   grocy:
     image: ghcr.io/linuxserver/grocy

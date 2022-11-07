@@ -5,6 +5,8 @@ networks:
     external: true
   db-network:
     external: true
+  mqtt-network:
+    external: true
 
 services:
 
@@ -81,6 +83,8 @@ services:
       - ${VOLUMES_PATH}/core-services/mqtt/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
       - ${VOLUMES_PATH}/core-services/mqtt/data:/mosquitto/data
       - ${VOLUMES_PATH}/core-services/mqtt/log:/mosquitto/log
+    networks:
+      - mqtt-network
 
   filebrowser:
     image: filebrowser/filebrowser
