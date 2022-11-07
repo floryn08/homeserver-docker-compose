@@ -14,7 +14,7 @@
 3. use .env.example for env variables in stack definition
 
 ## Networks:
-Create networks with `docker create network <network_name>`
+Create networks with `docker network create <network_name>`
 - nginx-network
 - db-network
 - media-management-network
