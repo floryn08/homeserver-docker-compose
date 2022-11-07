@@ -23,6 +23,9 @@ services:
     restart: unless-stopped
     privileged: true
     #network_mode: host
+    networks:
+      - home-automation-network
+      - nginx-network
 
   grocy:
     image: ghcr.io/linuxserver/grocy
