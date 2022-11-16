@@ -128,6 +128,8 @@ services:
       - PGID=1000
       - TZ=${TIMEZONE}
       - JELLYFIN_PublishedServerUrl=${LOCAL_IP} #optional
+    group_add: 
+      - 44
     volumes:
       - ${VOLUMES_PATH}/media-management/jellyfin:/config
       - ${MEDIA_HDD_PATH}/tv:/data/tvshows
