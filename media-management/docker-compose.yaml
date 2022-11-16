@@ -129,7 +129,7 @@ services:
       - TZ=${TIMEZONE}
       - JELLYFIN_PublishedServerUrl=${LOCAL_IP} #optional
     group_add: 
-      - 44
+      - "44"
     volumes:
       - ${VOLUMES_PATH}/media-management/jellyfin:/config
       - ${MEDIA_HDD_PATH}/tv:/data/tvshows
