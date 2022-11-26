@@ -15,7 +15,7 @@ services:
 
   pihole:
     container_name: pihole
-    image: pihole/pihole:2022.09.4
+    image: pihole/pihole:2022.11.1
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -70,7 +70,7 @@ services:
       - services
 
   vaultwarden:
-    image: vaultwarden/server:1.25.2
+    image: vaultwarden/server:1.26.0
     container_name: vaultwarden
     restart: unless-stopped
     environment:
