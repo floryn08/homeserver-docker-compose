@@ -121,7 +121,7 @@ services:
     restart: unless-stopped
 
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin:10.8.7
+    image: ghcr.io/linuxserver/jellyfin:arm32v7-10.8.7
     container_name: jellyfin
     environment:
       - PUID=1000
@@ -130,7 +130,6 @@ services:
       - JELLYFIN_PublishedServerUrl=${LOCAL_IP} #optional
     group_add: 
       - "44"
-    mem_limit: 300m
     volumes:
       - ${VOLUMES_PATH}/media-management/jellyfin:/config
       - ${MEDIA_HDD_PATH}/tv:/data/tvshows
