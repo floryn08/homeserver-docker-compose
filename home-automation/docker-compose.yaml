@@ -46,7 +46,7 @@ services:
       - nginx-network
       
       
- esphome:
+  esphome:
     container_name: esphome
     image: esphome/esphome
     volumes:
