@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
 
   mariadb:
-    image: lscr.io/linuxserver/mariadb:latest
+    image: lscr.io/linuxserver/mariadb:10.6.10
     container_name: mariadb
     environment:
       - PUID=1000
@@ -69,9 +69,8 @@ services:
     restart: unless-stopped
 
   mqtt:
-    container_name: mqtt
-    restart: unless-stopped
-    image: eclipse-mosquitto
+    image: eclipse-mosquitto:2.0.15
+    container_name: mqtt    
     environment:
       - PUID=1000
       - PGID=1000
@@ -85,9 +84,10 @@ services:
       - ${VOLUMES_PATH}/core-services/mqtt/log:/mosquitto/log
     networks:
       - mqtt-network
+    restart: unless-stopped
 
   filebrowser:
-    image: filebrowser/filebrowser
+    image: filebrowser/filebrowser:v2.23.0
     container_name: filebrowser
     volumes:
       - ${VOLUMES_PATH}/core-services/filebrowser/database.db:/database.db
@@ -101,7 +101,7 @@ services:
     restart: unless-stopped
 
   ddclient:
-    image: lscr.io/linuxserver/ddclient:latest
+    image: lscr.io/linuxserver/ddclient:3.10.0
     container_name: ddclient
     environment:
       - PUID=1000
@@ -112,7 +112,7 @@ services:
     restart: unless-stopped
 
   phpmyadmin:
-    image: lscr.io/linuxserver/phpmyadmin:latest
+    image: lscr.io/linuxserver/phpmyadmin:5.2.0
     container_name: phpmyadmin
     environment:
       - PUID=1000
