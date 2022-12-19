@@ -41,7 +41,7 @@ services:
       - media-management-network
 
   bazarr:
-    image: ghcr.io/linuxserver/bazarr
+    image: ghcr.io/linuxserver/bazarr:1.1.3
     container_name: bazarr
     environment:
       - PUID=1000
@@ -59,7 +59,7 @@ services:
       - media-management-network
 
   lidarr:
-    image: lscr.io/linuxserver/lidarr
+    image: lscr.io/linuxserver/lidarr:1.0.2
     container_name: lidarr
     environment:
       - PUID=1000
@@ -87,7 +87,7 @@ services:
     restart: unless-stopped
 
   jackett:
-    image: ghcr.io/linuxserver/jackett:latest
+    image: ghcr.io/linuxserver/jackett:0.20.2402
     container_name: jackett
     environment:
       - PUID=1000
@@ -105,7 +105,7 @@ services:
       - media-management-network
 
   deluge:
-    image: ghcr.io/linuxserver/deluge:latest
+    image: ghcr.io/linuxserver/deluge:2.1.1
     container_name: deluge
     # network_mode: host
     ports:
@@ -121,7 +121,7 @@ services:
     restart: unless-stopped
 
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin:arm32v7-10.8.7
+    image: ghcr.io/linuxserver/jellyfin:arm32v7-10.8.8
     container_name: jellyfin
     environment:
       - PUID=1000
