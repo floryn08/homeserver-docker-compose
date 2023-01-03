@@ -25,9 +25,9 @@ services:
     restart: unless-stopped
     privileged: true
     network_mode: host
-    networks:
-      - home-automation-network
-      - mqtt-network
+#     networks:
+#       - home-automation-network
+#       - mqtt-network
 
   grocy:
     image: ghcr.io/linuxserver/grocy
@@ -58,5 +58,5 @@ services:
     ports:
       - 6052:6052
       - 6123:6123
-    networks:
-      - home-automation-network
+#     networks:
+#       - home-automation-network
