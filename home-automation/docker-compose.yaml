@@ -30,7 +30,7 @@ services:
 #       - mqtt-network
 
   grocy:
-    image: ghcr.io/linuxserver/grocy
+    image: ghcr.io/linuxserver/grocy:3.3.1
     container_name: grocy
     environment:
       - PUID=1000
