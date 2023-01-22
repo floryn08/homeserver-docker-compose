@@ -11,7 +11,7 @@ networks:
 services:
 
   swag:
-    image: lscr.io/linuxserver/swag:1.32.0
+    image: lscr.io/linuxserver/swag:2.2.0
     container_name: swag
     cap_add:
       - NET_ADMIN
