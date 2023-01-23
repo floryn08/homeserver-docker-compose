@@ -5,9 +5,8 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": ["docker"],
-      "matchPackageNames": ["jellyfin"],
-      "versioning": "loose"
+      "packagePatterns": ["^ghcr.io\\/linuxserver\\/"],
+      "versionScheme": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$"
     }
   ]
 }
