@@ -71,6 +71,8 @@ services:
     ports:
       - 8686:8686
     restart: unless-stopped
+    networks:
+      - media-management-network
 
   readarr:
     image: lscr.io/linuxserver/readarr:nightly
@@ -84,22 +86,6 @@ services:
       - ${MEDIA_HDD_PATH}:/media #optional
     ports:
       - 8787:8787
-    restart: unless-stopped
-
-  jackett:
-    image: ghcr.io/linuxserver/jackett:0.20.2465
-    container_name: jackett
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
-      - AUTO_UPDATE=true #optional
-      # - RUN_OPTS=<run options here> #optional
-    volumes:
-      - ${VOLUMES_PATH}/media-management/jackett:/config
-      - ${MEDIA_HDD_PATH}/downloads:/downloads
-    ports:
-      - 9117:9117
     restart: unless-stopped
     networks:
       - media-management-network
@@ -174,3 +160,18 @@ services:
     networks:
       - media-management-network
       - nginx-network
+     
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:1.0.1
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${VOLUMES_PATH}/media-management/prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+    networks:
+      - media-management-network
