@@ -37,10 +37,10 @@ Create networks with `docker network create <network_name>`
   - Bazarr
   - Lidarr
   - Readarr
-  - Jacket
   - Deluge
   - Jellyfin
   - Nextcloud
+  - Prowlarr
 - Utility services
   - Pihole
   - Wireguard
