@@ -162,7 +162,7 @@ services:
       - nginx-network
      
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:1.0.1
+    image: lscr.io/linuxserver/prowlarr:1.8.1259
     container_name: prowlarr
     environment:
       - PUID=1000
