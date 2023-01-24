@@ -107,7 +107,7 @@ services:
     restart: unless-stopped
 
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin:arm32v7-10.8.8
+    image: ghcr.io/linuxserver/jellyfin:arm32v7-10.8.9
     container_name: jellyfin
     environment:
       - PUID=1000
