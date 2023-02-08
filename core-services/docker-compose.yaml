@@ -112,7 +112,7 @@ services:
     restart: unless-stopped
 
   phpmyadmin:
-    image: lscr.io/linuxserver/phpmyadmin:5.2.0
+    image: lscr.io/linuxserver/phpmyadmin:5.2.1
     container_name: phpmyadmin
     environment:
       - PUID=1000
