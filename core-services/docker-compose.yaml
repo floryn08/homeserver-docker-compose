@@ -11,7 +11,7 @@ networks:
 services:
 
   swag:
-    image: lscr.io/linuxserver/swag:1.32.0
+    image: ghcr.io/linuxserver/swag:1.32.0
     container_name: swag
     cap_add:
       - NET_ADMIN
@@ -31,7 +31,7 @@ services:
     restart: unless-stopped
 
   mariadb:
-    image: lscr.io/linuxserver/mariadb:10.6.12
+    image: ghcr.io/linuxserver/mariadb:10.6.12
     container_name: mariadb
     environment:
       - PUID=1000
@@ -101,7 +101,7 @@ services:
     restart: unless-stopped
 
   ddclient:
-    image: lscr.io/linuxserver/ddclient:3.10.0
+    image: ghcr.io/linuxserver/ddclient:3.10.0
     container_name: ddclient
     environment:
       - PUID=1000
@@ -112,7 +112,7 @@ services:
     restart: unless-stopped
 
   phpmyadmin:
-    image: lscr.io/linuxserver/phpmyadmin:5.2.1
+    image: ghcr.io/linuxserver/phpmyadmin:5.2.1
     container_name: phpmyadmin
     environment:
       - PUID=1000
