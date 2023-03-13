@@ -194,3 +194,5 @@ services:
       #- /dev/dri:/dev/dri #optional
       #- /dev/dvb:/dev/dvb #optional
     restart: unless-stopped
+    networks:
+      - media-management-network
