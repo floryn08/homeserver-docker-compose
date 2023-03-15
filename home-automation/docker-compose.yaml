@@ -48,7 +48,7 @@ services:
       
   esphome:
     container_name: esphome
-    image: esphome/esphome:2023.2
+    image: esphome/esphome:2023.3
     volumes:
       - ${VOLUMES_PATH}/home-automation/esphome/config:/config
       - /etc/localtime:/etc/localtime:ro
