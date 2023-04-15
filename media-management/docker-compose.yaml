@@ -59,7 +59,7 @@ services:
       - media-management-network
 
   lidarr:
-    image: ghcr.io/linuxserver/lidarr:1.0.2
+    image: ghcr.io/linuxserver/lidarr:1.1.4
     container_name: lidarr
     environment:
       - PUID=1000
