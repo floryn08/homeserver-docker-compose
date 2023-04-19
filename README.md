@@ -41,11 +41,15 @@ Create networks with `docker network create <network_name>`
   - Jellyfin
   - Nextcloud
   - Prowlarr
+  - TvHeadEnd
 - Utility services
   - Pihole
   - Wireguard
   - Vaultwarden
   - Cups
+  - Homepage
+  - Scrutiny
+  - Speedtest
 - Home automation
   - Home assistant
   - Grocy
