@@ -154,5 +154,3 @@ services:
     volumes:
       - ${VOLUMES_PATH}/utility-services/homepage/config:/app/config
     restart: unless-stopped
-    networks:
-      - utility-services
