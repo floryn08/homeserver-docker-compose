@@ -111,7 +111,7 @@ services:
     cap_add:
       - SYS_RAWIO
     ports:
-      - 8082:8080
+      - 8083:8080
       - 8086:8086
     environment:
       - TZ=${TIMEZONE}
