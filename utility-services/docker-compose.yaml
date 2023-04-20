@@ -142,8 +142,6 @@ services:
       - 8443:443
     volumes:
       - ${VOLUMES_PATH}/utility-services/speedtest/config:/config
-      - ${MEDIA_HDD_PATH}:/media
-      - ${BACKUP_HDD_PATH}:/backup
     restart: unless-stopped
     
   homepage:
@@ -155,6 +153,8 @@ services:
       - 3000:3000
     volumes:
       - ${VOLUMES_PATH}/utility-services/homepage/config:/app/config
+      - ${MEDIA_HDD_PATH}:/media
+      - ${BACKUP_HDD_PATH}:/backup
     restart: unless-stopped
     
   dockerproxy:
