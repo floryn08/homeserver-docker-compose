@@ -142,6 +142,8 @@ services:
       - 8443:443
     volumes:
       - ${VOLUMES_PATH}/utility-services/speedtest/config:/config
+      - ${MEDIA_HDD_PATH}:/media
+      - ${BACKUP_HDD_PATH}:/backup
     restart: unless-stopped
     
   homepage:
