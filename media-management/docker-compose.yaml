@@ -58,38 +58,6 @@ services:
     networks:
       - media-management-network
 
-  lidarr:
-    image: ghcr.io/linuxserver/lidarr:1.1.4
-    container_name: lidarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${VOLUMES_PATH}/media-management/lidarr:/config
-      - ${MEDIA_HDD_PATH}:/media #optional
-    ports:
-      - 8686:8686
-    restart: unless-stopped
-    networks:
-      - media-management-network
-
-  readarr:
-    image: ghcr.io/linuxserver/readarr:nightly
-    container_name: readarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
-    volumes:
-      - ${VOLUMES_PATH}/media-management/readarr:/config
-      - ${MEDIA_HDD_PATH}:/media #optional
-    ports:
-      - 8787:8787
-    restart: unless-stopped
-    networks:
-      - media-management-network
-
   deluge:
     image: ghcr.io/linuxserver/deluge:2.1.1
     container_name: deluge
