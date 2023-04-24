@@ -126,3 +126,22 @@ services:
     restart: unless-stopped
     networks:
       - db-network
+
+  duplicacy:
+    container_name: duplicacy
+    hostname: duplicacy
+    image: ghcr.io/hotio/duplicacy:release-1.6.3
+    ports:
+      - "3875:3875"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${VOLUMES_PATH}/core-services/duplicacy/config:/config
+      - ${VOLUMES_PATH}/core-services/duplicacy/cache:/cache
+      - ${VOLUMES_PATH}/core-services/duplicacy/logs:/logs
+      - ${BACKUP_HDD_PATH}/backups:/backups
+      - /home/pi:/source
+      - ${STORAGE_HDD_PATH}:/storage
