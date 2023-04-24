@@ -26,11 +26,11 @@ Create networks with `docker network create <network_name>`
 - Core services
   - Swag nginx
   - MariaDb
-  - Duplicati
   - Mqtt
   - Filebrowser
   - Ddclient
   - Phpmyadmin
+  - Duplicacy
 - Media management
   - Sonarr
   - Radarr
