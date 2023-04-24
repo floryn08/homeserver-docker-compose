@@ -35,8 +35,6 @@ Create networks with `docker network create <network_name>`
   - Sonarr
   - Radarr
   - Bazarr
-  - Lidarr
-  - Readarr
   - Deluge
   - Jellyfin
   - Nextcloud
@@ -53,8 +51,4 @@ Create networks with `docker network create <network_name>`
 - Home automation
   - Home assistant
   - Grocy
-- Website
-  - Ghost
-- Cinema crawler - TBD
-  - Backend - java
-  - Frontend - angular
+  - EspHome
