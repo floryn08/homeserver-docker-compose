@@ -50,23 +50,6 @@ services:
     networks:
       - db-network
 
-  duplicati:
-    image: duplicati/duplicati
-    container_name: duplicati
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
-      - CLI_ARGS= #optional
-    volumes:
-      - ${VOLUMES_PATH}/core-services/duplicati:/data
-      - ${BACKUP_HDD_PATH}/backups:/backups
-      - /home/pi:/source
-      - ${STORAGE_HDD_PATH}:/storage
-    ports:
-      - 8200:8200
-    restart: unless-stopped
-
   mqtt:
     image: eclipse-mosquitto:2.0.15
     container_name: mqtt    
