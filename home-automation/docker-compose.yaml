@@ -12,7 +12,7 @@ services:
 
   homeassistant:
     container_name: homeassistant
-    image: ghcr.io/home-assistant/home-assistant:2023.4.5
+    image: ghcr.io/home-assistant/home-assistant:2023.4.6
     environment:
       - PUID=1000
       - PGID=1000
