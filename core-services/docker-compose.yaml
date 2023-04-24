@@ -60,10 +60,9 @@ services:
       - CLI_ARGS= #optional
     volumes:
       - ${VOLUMES_PATH}/core-services/duplicati:/data
-      - /mnt/hdd2/backups:/backups
+      - ${BACKUP_HDD_PATH}/backups:/backups
       - /home/pi:/source
-      - /opt/appdata:/docker-appdata
-      - /mnt/hdd2/nextcloud/floryn08/files/InstantUpload/Camera:/mnt/hdd2/nextcloud/floryn08/files/InstantUpload/Camera
+      - ${STORAGE_HDD_PATH}:/storage
     ports:
       - 8200:8200
     restart: unless-stopped
