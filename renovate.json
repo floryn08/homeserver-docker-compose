@@ -5,7 +5,7 @@
   ],
   "packageRules": [
     {
-      "packagePatterns": ["^ghcr.io\\/linuxserver\\/"],
+      "packagePatterns": ["^ghcr.io\\/linuxserver\\/", "^ghcr.io\\/hotio\\/"],
       "versionScheme": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$"
     }
   ]
