@@ -111,7 +111,7 @@ services:
       - nginx-network
 
   nextcloud:
-    image: ghcr.io/linuxserver/nextcloud:26.0.0
+    image: ghcr.io/linuxserver/nextcloud:26.0.1
     container_name: nextcloud
     environment:
       - PUID=1000
