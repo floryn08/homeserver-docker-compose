@@ -25,11 +25,12 @@ Create networks with `docker network create <network_name>`
 
 - Core services
   - Swag nginx
-  - MariaDb
+  - Redis
+  - Postgres
+  - Pgadmin
   - Mqtt
   - Filebrowser
   - Ddclient
-  - Phpmyadmin
   - Duplicacy
 - Media management
   - Sonarr
@@ -45,9 +46,11 @@ Create networks with `docker network create <network_name>`
   - Wireguard
   - Vaultwarden
   - Cups
-  - Homepage
   - Scrutiny
   - Speedtest
+  - Dockerproxy
+  - Homepage
+  - Ghostfolio
 - Home automation
   - Home assistant
   - Grocy

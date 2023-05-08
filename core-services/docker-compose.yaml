@@ -30,23 +30,41 @@ services:
       - nginx-network
     restart: unless-stopped
 
-  mariadb:
-    image: ghcr.io/linuxserver/mariadb:10.6.12
-    container_name: mariadb
+  redis:
+    image: redis:7.0.11-alpine
+    container_name: redis
     environment:
-      - PUID=1000
-      - PGID=1000
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - TZ=${TIMEZONE}
-      #- MYSQL_DATABASE=${MYSQL_DATABASE} #optional
-      #- MYSQL_USER=${MYSQL_USER} #optional
-      #- MYSQL_PASSWORD=${MYSQL_PASSWORD} #optional
-      #- REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql #optional
-    volumes:
-      - ${VOLUMES_PATH}/core-services/mariadb/config:/config
+      POSTGRES_PASSWORD: ${REDIS_PASSWORD}
     ports:
-      - 3306:3306
-    restart: unless-stopped
+      - 6379:6379
+    networks:
+      - db-network
+
+  postgres:
+    image: postgres:15.2-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - 5432:5432
+    volumes:
+      - ${VOLUMES_PATH}/core-services/postgres/data:/var/lib/postgresql/data
+    networks:
+      - db-network
+
+  pgadmin:
+    image: dpage/pgadmin4:7.1
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - ${VOLUMES_PATH}/core-services/pgadmin/data:/var/lib/pgadmin
+    ports:
+      - 5050:80
     networks:
       - db-network
 
@@ -92,23 +110,6 @@ services:
     volumes:
       - ${VOLUMES_PATH}/core-services/ddclient:/config
     restart: unless-stopped
-
-  phpmyadmin:
-    image: ghcr.io/linuxserver/phpmyadmin:5.2.1
-    container_name: phpmyadmin
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
-      - PMA_ARBITRARY=1 #optional
-      #- PMA_ABSOLUTE_URI=https://phpmyadmin.example.com #optional
-    volumes:
-      - ${VOLUMES_PATH}/core-services/phpmyadmin/config:/config
-    ports:
-      - 8082:80
-    restart: unless-stopped
-    networks:
-      - db-network
 
   duplicacy:
     container_name: duplicacy
