@@ -3,6 +3,8 @@ version: "3.9"
 networks:
   nginx-network:
     external: true
+  db-network:
+    external: true
   services:
     name: "services"
     driver: bridge
@@ -186,4 +188,6 @@ services:
       ACCESS_TOKEN_SALT: ${ACCESS_TOKEN_SALT}
       JWT_SECRET_KEY: ${JWT_SECRET_KEY}
     privileged: true
+    networks:
+      - db-network
     restart: unless-stopped
