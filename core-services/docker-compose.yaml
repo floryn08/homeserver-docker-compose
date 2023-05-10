@@ -39,6 +39,7 @@ services:
       - 6379:6379
     networks:
       - db-network
+    restart: unless-stopped
 
   postgres:
     image: postgres:15.2-alpine
@@ -53,6 +54,7 @@ services:
       - ${VOLUMES_PATH}/core-services/postgres/data:/var/lib/postgresql/data
     networks:
       - db-network
+    restart: unless-stopped
 
   pgadmin:
     image: dpage/pgadmin4:7.1
@@ -67,6 +69,7 @@ services:
       - 5050:80
     networks:
       - db-network
+    restart: unless-stopped
 
   mqtt:
     image: eclipse-mosquitto:2.0.15
@@ -129,3 +132,4 @@ services:
       - ${BACKUP_HDD_PATH}/backups:/backups
       - /home/pi:/source
       - ${STORAGE_HDD_PATH}:/storage
+    restart: unless-stopped
