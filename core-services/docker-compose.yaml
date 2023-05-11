@@ -42,7 +42,7 @@ services:
     restart: unless-stopped
 
   postgres:
-    image: postgres:15.2-alpine
+    image: postgres:15.3-alpine
     container_name: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
