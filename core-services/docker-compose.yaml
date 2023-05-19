@@ -11,7 +11,7 @@ networks:
 services:
 
   swag:
-    image: ghcr.io/linuxserver/swag:2.5.0
+    image: ghcr.io/linuxserver/swag:2.6.0
     container_name: swag
     cap_add:
       - NET_ADMIN
