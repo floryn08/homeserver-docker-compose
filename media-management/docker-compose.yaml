@@ -164,3 +164,18 @@ services:
     restart: unless-stopped
     networks:
       - media-management-network
+     
+  jellyseerr:
+    image: fallenbagel/jellyseerr:1.5.0
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=${TIMEZONE}
+    ports:
+      - 5055:5055
+    volumes:
+      - ${VOLUMES_PATH}/media-management/jellyseerr/config:/app/config
+    restart: unless-stopped
+    networks:
+      - media-management-network
+
