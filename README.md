@@ -41,6 +41,7 @@ Create networks with `docker network create <network_name>`
   - Nextcloud
   - Prowlarr
   - TvHeadEnd
+  - Jellyseer
 - Utility services
   - Pihole
   - Wireguard
