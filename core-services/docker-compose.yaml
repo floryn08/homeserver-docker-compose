@@ -133,3 +133,12 @@ services:
       - /home/pi:/source
       - ${STORAGE_HDD_PATH}:/storage
     restart: unless-stopped
+    
+  cloudflare:
+    image: cloudflare/cloudflared:2023.5.1
+    container_name: cloudflare
+    environment:
+      - PUID=1000
+      - PGID=1000
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TOKEN}
+    restart: unless-stopped
