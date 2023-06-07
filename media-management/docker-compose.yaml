@@ -196,5 +196,5 @@ services:
     restart: unless-stopped
     networks:
       - media-management-network
-      - nginx-networkQ
+      - nginx-network
 
