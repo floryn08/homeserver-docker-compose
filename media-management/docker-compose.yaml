@@ -188,7 +188,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - APP_URL=https://${DOMAIN2}/wizarr
+      - APP_URL=https://wizarr.${DOMAIN2}
       - DISABLE_BUILTIN_AUTH=false
       - TZ=${TIMEZONE}
     volumes:
