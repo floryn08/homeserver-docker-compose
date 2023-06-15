@@ -135,7 +135,7 @@ services:
     restart: unless-stopped
     
   cloudflare:
-    image: cloudflare/cloudflared:2023.5.1
+    image: cloudflare/cloudflared:2023.6.0
     container_name: cloudflare
     environment:
       - PUID=1000
