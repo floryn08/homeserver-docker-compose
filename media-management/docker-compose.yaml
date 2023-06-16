@@ -112,6 +112,7 @@ services:
       - traefik.http.routers.jellyfin.entrypoints=websecure
       - traefik.http.routers.jellyfin-alt.rule=Host(`${DOMAIN2}`) && PathPrefix(`/jellyfin`)
       - traefik.http.routers.jellyfin-alt.entrypoints=web
+      - traefik.http.routers.jellyfin-alt.tls.certresolver=letsencrypt
       - traefik.http.services.jellyfin.loadbalancer.server.port=8096
     networks:
       - media-management-network
