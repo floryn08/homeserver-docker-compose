@@ -10,25 +10,35 @@ networks:
 
 services:
 
-  swag:
-    image: ghcr.io/linuxserver/swag:2.6.0
-    container_name: swag
-    cap_add:
-      - NET_ADMIN
+  ofelia:
+    container_name: ofelia
+    image: mcuadros/ofelia:v0.3.7
+    command: daemon --config=/config/config.ini
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=${TIMEZONE}
-      - URL=${DOMAIN}
-      - VALIDATION=http
     volumes:
-      - ${VOLUMES_PATH}/core-services/swag/config:/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${VOLUMES_PATH}/core-services/ofelia:/config
+    restart: unless-stopped
+
+  traefik:
+    image: traefik:v2.10.1
+    container_name: traefik
+    command:
+      #- "--log.level=DEBUG"
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
     ports:
-      - 443:443
       - 80:80
+      - 8082:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - nginx-network
-    restart: unless-stopped
 
   redis:
     image: redis:7.0.11-alpine
