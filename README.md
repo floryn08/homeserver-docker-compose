@@ -15,7 +15,8 @@
 
 ## Networks:
 Create networks with `docker network create <network_name>`
-- nginx-network
+- cloudflare-network
+- proxy-network
 - db-network
 - media-management-network
 - utility-network

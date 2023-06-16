@@ -1,7 +1,9 @@
 version: "3.9"
 
 networks:
-  nginx-network:
+  cloudflare-network:
+    external: true
+  proxy-network:
     external: true
   media-management-network:
     external: true
@@ -116,7 +118,7 @@ services:
       - traefik.http.services.jellyfin.loadbalancer.server.port=8096
     networks:
       - media-management-network
-      - nginx-network
+      - proxy-network
 
   nextcloud:
     image: ghcr.io/linuxserver/nextcloud:27.0.0
@@ -139,7 +141,7 @@ services:
       - traefik.http.services.nextcloud.loadbalancer.server.port=80
     networks:
       - media-management-network
-      - nginx-network
+      - proxy-network
      
   prowlarr:
     image: ghcr.io/linuxserver/prowlarr:1.5.2
@@ -190,7 +192,7 @@ services:
     restart: unless-stopped
     networks:
       - media-management-network
-      - nginx-network
+      - cloudflare-network
      
   wizarr:
     container_name: wizarr
@@ -208,5 +210,5 @@ services:
     restart: unless-stopped
     networks:
       - media-management-network
-      - nginx-network
+      - cloudflare-network
 

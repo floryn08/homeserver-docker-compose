@@ -1,7 +1,7 @@
 version: "3.9"
 
 networks:
-  nginx-network:
+  cloudflare-network:
     external: true
   db-network:
     external: true
@@ -88,7 +88,7 @@ services:
     volumes:
       - ${VOLUMES_PATH}/utility-services/vaultwarden/data:/data
     networks:
-      - nginx-network
+      - cloudflare-network
 
   cups:
     # user: print & pass: print

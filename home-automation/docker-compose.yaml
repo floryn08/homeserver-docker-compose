@@ -3,7 +3,7 @@ version: "3.9"
 networks:
   home-automation-network:
     external: true
-  nginx-network:
+  cloudflare-network:
     external: true
   mqtt-network:
     external: true
@@ -21,13 +21,9 @@ services:
       - "8123:8123"
     volumes:
       - ${VOLUMES_PATH}/home-automation/homeassistant:/config
-      # - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     privileged: true
     network_mode: host
-#     networks:
-#       - home-automation-network
-#       - mqtt-network
 
   grocy:
     image: ghcr.io/linuxserver/grocy:3.3.2
@@ -43,8 +39,7 @@ services:
     restart: unless-stopped
     networks:
       - home-automation-network
-      - nginx-network
-      
+      - cloudflare-network
       
   esphome:
     container_name: esphome
@@ -53,10 +48,7 @@ services:
       - ${VOLUMES_PATH}/home-automation/esphome/config:/config
       - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
-    #privileged: true
     network_mode: host
     ports:
       - 6052:6052
       - 6123:6123
-#     networks:
-#       - home-automation-network

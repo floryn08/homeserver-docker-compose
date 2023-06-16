@@ -1,7 +1,9 @@
 version: "3.9"
 
 networks:
-  nginx-network:
+  proxy-network:
+    external: true
+  cloudflare-network:
     external: true
   db-network:
     external: true
@@ -31,7 +33,7 @@ services:
       - --api.insecure=true
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
-      - --providers.docker.network=nginx-network
+      - --providers.docker.network=proxy-network
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
       - --certificatesresolvers.letsencrypt.acme.httpchallenge=true
@@ -45,8 +47,6 @@ services:
     volumes:
       - ${VOLUMES_PATH}/core-services/letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    networks:
-      - nginx-network
 
   redis:
     image: redis:7.0.11-alpine
@@ -161,5 +161,5 @@ services:
     command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TOKEN}
     restart: unless-stopped
     networks:
-      - nginx-network
+      - cloudflare-network
       
