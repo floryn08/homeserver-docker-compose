@@ -108,12 +108,11 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.routers.jellyfin.rule=(Host(`${DOMAIN}`) && PathPrefix(`/jellyfin`)) || (Host(`${DOMAIN2}`) && PathPrefix(`/jellyfin`))
-      - traefik.http.routers.jellyfin.entrypoints=web
-      # - traefik.http.routers.jellyfin.middlewares=jellyfin-stripprefix
-      # - traefik.http.middlewares.jellyfin-stripprefix.stripprefix.prefixes=/jellyfin
+      - traefik.http.routers.jellyfin.rule=Host(`${DOMAIN}`) && PathPrefix(`/jellyfin`)
+      - traefik.http.routers.jellyfin.entrypoints=websecure
+      - traefik.http.routers.jellyfin-alt.rule=Host(`${DOMAIN2}`) && PathPrefix(`/jellyfin`)
+      - traefik.http.routers.jellyfin-alt.entrypoints=web
       - traefik.http.services.jellyfin.loadbalancer.server.port=8096
-      # - traefik.http.routers.jellyfin.tls.certresolver=letsencrypt
     networks:
       - media-management-network
       - nginx-network
