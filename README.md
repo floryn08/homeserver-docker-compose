@@ -24,7 +24,8 @@ Create networks with `docker network create <network_name>`
 ## Services:
 
 - Core services
-  - Swag nginx
+  - Ofelia
+  - Traefik
   - Redis
   - Postgres
   - Pgadmin
@@ -32,6 +33,7 @@ Create networks with `docker network create <network_name>`
   - Filebrowser
   - Ddclient
   - Duplicacy
+  - Cloudflare
 - Media management
   - Sonarr
   - Radarr
@@ -42,6 +44,7 @@ Create networks with `docker network create <network_name>`
   - Prowlarr
   - TvHeadEnd
   - Jellyseer
+  - Wizarr
 - Utility services
   - Pihole
   - Wireguard
