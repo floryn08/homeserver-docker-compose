@@ -47,6 +47,8 @@ services:
     volumes:
       - ${VOLUMES_PATH}/core-services/letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - proxy-network
 
   redis:
     image: redis:7.0.11-alpine
