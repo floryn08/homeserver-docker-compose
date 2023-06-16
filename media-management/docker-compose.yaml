@@ -131,8 +131,12 @@ services:
       - ${BACKUP_HDD_PATH}/nextcloud:/data
     ports:
       - 1102:80
-      - 1101:443
     restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nextcloud.rule=Host(`nextcloud.${DOMAIN2}`)
+      - traefik.http.routers.nextcloud.entrypoints=web
+      - traefik.http.services.nextcloud.loadbalancer.server.port=80
     networks:
       - media-management-network
       - nginx-network
