@@ -106,6 +106,10 @@ services:
       - /dev/video11:/dev/video11 #optional
       - /dev/video12:/dev/video12 #optional
     restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=Host(`${DOMAIN}`,`${DOMAIN2}`) && Path(`/jellyfin`)
+      - traefik.http.routers.whoami.entrypoints=web
     networks:
       - media-management-network
       - nginx-network
