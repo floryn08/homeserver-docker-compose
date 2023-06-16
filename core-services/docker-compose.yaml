@@ -27,15 +27,21 @@ services:
     image: traefik:v2.10.1
     container_name: traefik
     command:
-      #- "--log.level=DEBUG"
+      - --log.level=DEBUG
       - --api.insecure=true
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
       - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.letsencrypt.acme.tlschallenge=true
+      - --certificatesresolvers.letsencrypt.acme.email=${ADMIN_EMAIL}
+      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
     ports:
       - 80:80
+      - 443:443
       - 8082:8080
     volumes:
+      - ${VOLUMES_PATH}/core-services/letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - nginx-network
