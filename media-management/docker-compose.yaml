@@ -110,8 +110,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.jellyfin.rule=(Host(`${DOMAIN}`) && PathPrefix(`/jellyfin`)) || (Host(`${DOMAIN2}`) && PathPrefix(`/jellyfin`))
       - traefik.http.routers.jellyfin.entrypoints=web
-      - traefik.http.routers.jellyfin.middlewares=jellyfin-stripprefix
-      - traefik.http.middlewares.jellyfin-stripprefix.stripprefix.prefixes=/jellyfin
+      # - traefik.http.routers.jellyfin.middlewares=jellyfin-stripprefix
+      # - traefik.http.middlewares.jellyfin-stripprefix.stripprefix.prefixes=/jellyfin
       - traefik.http.services.jellyfin.loadbalancer.server.port=8096
       # - traefik.http.routers.jellyfin.tls.certresolver=letsencrypt
     networks:
