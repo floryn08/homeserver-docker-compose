@@ -108,8 +108,9 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.routers.whoami.rule=Host(`${DOMAIN}`,`${DOMAIN2}`) && Path(`/jellyfin`)
-      - traefik.http.routers.whoami.entrypoints=web
+      - traefik.http.routers.jellyfin.rule=Host(`${DOMAIN}`,`${DOMAIN2}`) && Path(`/jellyfin`)
+      - traefik.http.routers.jellyfin.entrypoints=web
+      - traefik.http.services.jellyfin.loadbalancer.server.port=8096
     networks:
       - media-management-network
       - nginx-network
