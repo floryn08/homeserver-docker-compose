@@ -158,20 +158,9 @@ services:
       - ${VOLUMES_PATH}/utility-services/homepage/config:/app/config
       - ${MEDIA_HDD_PATH}:/media
       - ${BACKUP_HDD_PATH}:/backup
-    restart: unless-stopped
-    
-  dockerproxy:
-    image: ghcr.io/tecnativa/docker-socket-proxy:0.1.1
-    container_name: dockerproxy
-    environment:
-      - CONTAINERS=1
-      - POST=0
-    ports:
-      - 2375:2375
-    volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
-
+    
   ghostfolio:
     container_name: ghostfolio
     image: ghostfolio/ghostfolio:1.280.1
