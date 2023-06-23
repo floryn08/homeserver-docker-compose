@@ -150,8 +150,6 @@ services:
     container_name: homepage
     environment:
       - TZ=${TIMEZONE}
-      - PUID=1000
-      - PGID=1000
     ports:
       - 3000:3000
     volumes:
