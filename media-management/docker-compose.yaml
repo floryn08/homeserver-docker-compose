@@ -144,7 +144,7 @@ services:
       - proxy-network
      
   prowlarr:
-    image: ghcr.io/linuxserver/prowlarr:1.5.2
+    image: ghcr.io/linuxserver/prowlarr:1.6.3
     container_name: prowlarr
     environment:
       - PUID=1000
