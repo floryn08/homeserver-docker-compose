@@ -161,7 +161,7 @@ services:
     
   ghostfolio:
     container_name: ghostfolio
-    image: ghostfolio/ghostfolio:1.282.0
+    image: ghostfolio/ghostfolio:1.284.0
     ports:
       - 3333:3333
     environment:
