@@ -27,7 +27,7 @@ services:
       - media-management-network
 
   radarr:
-    image: ghcr.io/linuxserver/radarr:4.5.2
+    image: ghcr.io/linuxserver/radarr:4.6.4
     container_name: radarr
     environment:
       - PUID=1000
