@@ -72,7 +72,7 @@ services:
       - services
 
   vaultwarden:
-    image: vaultwarden/server:1.28.1
+    image: vaultwarden/server:1.29.0
     container_name: vaultwarden
     restart: unless-stopped
     environment:
