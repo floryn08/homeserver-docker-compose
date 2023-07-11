@@ -51,7 +51,7 @@ services:
       - proxy-network
 
   redis:
-    image: redis:7.0.11-alpine
+    image: redis:7.0.12-alpine
     container_name: redis
     environment:
       POSTGRES_PASSWORD: ${REDIS_PASSWORD}
