@@ -49,6 +49,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - proxy-network
+    restart: unless-stopped
 
   redis:
     image: redis:7.0.12-alpine
