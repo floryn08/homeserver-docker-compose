@@ -159,7 +159,7 @@ services:
       - media-management-network
       
   tvheadend:
-    image: ghcr.io/linuxserver/tvheadend:arm64v8-14298acb-ls174
+    image: ghcr.io/linuxserver/tvheadend:arm64v8-14298acb-ls175
     container_name: tvheadend
     environment:
       - PUID=1000
