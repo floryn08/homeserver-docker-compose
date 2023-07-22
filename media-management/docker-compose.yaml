@@ -43,7 +43,7 @@ services:
       - media-management-network
 
   bazarr:
-    image: ghcr.io/linuxserver/bazarr:1.2.3
+    image: ghcr.io/linuxserver/bazarr:1.2.4
     container_name: bazarr
     environment:
       - PUID=1000
