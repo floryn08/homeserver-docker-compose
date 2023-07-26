@@ -73,7 +73,7 @@ services:
       - DELUGE_LOGLEVEL=error #optional
     volumes:
       - ${VOLUMES_PATH}/media-management/deluge:/config
-      - ${MEDIA_HDD_PATH}/downloads:/downloads
+      - ${MEDIA_HDD_PATH}:/media
     restart: unless-stopped
 
   jellyfin:
