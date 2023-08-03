@@ -111,7 +111,7 @@ services:
     restart: unless-stopped
 
   filebrowser:
-    image: filebrowser/filebrowser:v2.23.0
+    image: filebrowser/filebrowser:v2.24.1
     container_name: filebrowser
     volumes:
       - ${VOLUMES_PATH}/core-services/filebrowser/database.db:/database.db
