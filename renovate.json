@@ -18,22 +18,22 @@
       "versionScheme": "regex:^arm64v8-(?<compatibility>)?.*-ls(?<major>\\d+)?$"
     },
     {
-      "matchFiles": ["^core-services/docker-compose.yaml$"],
+      "matchFileNames": ["core-services/docker-compose.yaml"],
       "groupName": "Core services",
       "groupSlug": "core-services"
     },
     {
-      "matchFiles": ["^home-automation/docker-compose.yaml$"],
+      "matchFileNames": ["home-automation/docker-compose.yaml"],
       "groupName": "Home automation",
       "groupSlug": "home-automation"
     },
     {
-      "matchFiles": ["^media-management/docker-compose.yaml$"],
+      "matchFileNames": ["media-management/docker-compose.yaml"],
       "groupName": "Media management",
       "groupSlug": "media-management"
     },
     {
-      "matchFiles": ["^utility-services/docker-compose.yaml$"],
+      "matchFileNames": ["utility-services/docker-compose.yaml"],
       "groupName": "Utility services",
       "groupSlug": "utility-services"
     }
