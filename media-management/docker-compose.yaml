@@ -27,7 +27,7 @@ services:
       - media-management-network
 
   radarr:
-    image: ghcr.io/linuxserver/radarr:4.6.4
+    image: ghcr.io/linuxserver/radarr:4.7.5
     container_name: radarr
     environment:
       - PUID=1000
@@ -121,7 +121,7 @@ services:
       - proxy-network
 
   nextcloud:
-    image: ghcr.io/linuxserver/nextcloud:27.0.1
+    image: ghcr.io/linuxserver/nextcloud:27.0.2
     container_name: nextcloud
     environment:
       - PUID=1000
