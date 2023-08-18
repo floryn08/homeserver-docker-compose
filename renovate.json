@@ -15,7 +15,7 @@
     },
     {
       "packagePatterns": ["^ghcr.io\\/linuxserver\\/tvheadend"],
-      "versionScheme": "regex:^arm64v8-(?<compatibility>)?.*-ls(?<major>\\d+)?$"
+      "versionScheme": "regex:^arm64v8-(?<compatibility>)?.*-ls(?<minor>\\d+)?$"
     },
     {
       "matchFileNames": ["core-services/docker-compose.yaml"],
