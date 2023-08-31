@@ -78,7 +78,7 @@ services:
     restart: unless-stopped
 
   pgadmin:
-    image: dpage/pgadmin4:7.5
+    image: dpage/pgadmin4:7.6
     container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
@@ -156,7 +156,7 @@ services:
     restart: unless-stopped
     
   cloudflare:
-    image: cloudflare/cloudflared:2023.7.3
+    image: cloudflare/cloudflared:2023.8.2
     container_name: cloudflare
     environment:
       - PUID=1000
