@@ -121,7 +121,7 @@ services:
       - proxy-network
 
   nextcloud:
-    image: ghcr.io/linuxserver/nextcloud:27.0.2
+    image: ghcr.io/linuxserver/nextcloud:27.1.0
     container_name: nextcloud
     environment:
       - PUID=1000
@@ -159,7 +159,7 @@ services:
       - media-management-network
       
   tvheadend:
-    image: ghcr.io/linuxserver/tvheadend:arm64v8-ec56067f-ls182
+    image: ghcr.io/linuxserver/tvheadend:arm64v8-fe4df311-ls183
     container_name: tvheadend
     environment:
       - PUID=1000
@@ -180,7 +180,7 @@ services:
       - media-management-network
      
   jellyseerr:
-    image: fallenbagel/jellyseerr:1.6.0
+    image: fallenbagel/jellyseerr:1.7.0
     container_name: jellyseerr
     environment:
       - LOG_LEVEL=debug
