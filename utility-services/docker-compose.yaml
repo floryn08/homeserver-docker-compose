@@ -76,7 +76,9 @@ services:
     container_name: vaultwarden
     restart: unless-stopped
     environment:
-      - WEBSOCKET_ENABLED=true
+      - PUSH_ENABLED=true
+      - PUSH_INSTALLATION_ID=${PUSH_INSTALLATION_ID}
+      - PUSH_INSTALLATION_KEY=${PUSH_INSTALLATION_KEY}
       - SIGNUPS_ALLOWED=false
       - SMTP_HOST=${SMTP_HOST}
       - SMTP_FROM=${SMTP_EMAIL}
