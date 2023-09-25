@@ -138,10 +138,10 @@ services:
     image: ghcr.io/alexjustesen/speedtest-tracker:v0.12.2
     container_name: speedtest-tracker
     environment:
-      - PUID: 1000
-      - PGID: 1000
-      - DB_CONNECTION: sqlite
-      - DB_HOST: /config/database.sqlite
+      PUID: 1000
+      PGID: 1000
+      DB_CONNECTION: sqlite
+      DB_HOST: /config/database.sqlite
     ports:
       - 8081:80
       - 8443:443
