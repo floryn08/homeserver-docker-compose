@@ -135,7 +135,7 @@ services:
       start_period: 20s
       
   speedtest-tracker:
-    image: ghcr.io/alexjustesen/speedtest-tracker:v0.11.22
+    image: ghcr.io/alexjustesen/speedtest-tracker:v0.12.2
     container_name: speedtest-tracker
     environment:
       - PUID=1000
@@ -148,7 +148,7 @@ services:
     restart: unless-stopped
     
   homepage:
-    image: ghcr.io/benphelps/homepage:v0.6.33
+    image: ghcr.io/benphelps/homepage:v0.6.35
     container_name: homepage
     environment:
       - TZ=${TIMEZONE}
