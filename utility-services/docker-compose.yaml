@@ -121,7 +121,6 @@ services:
     volumes:
       - /run/udev:/run/udev:ro
       - ${VOLUMES_PATH}/utility-services/scrutiny/config:/opt/scrutiny/config
-      - ${VOLUMES_PATH}/utility-services/scrutiny/influxdb:/opt/scrutiny/influxdb
     restart: unless-stopped
     devices:
       - /dev/sda
@@ -140,13 +139,19 @@ services:
     environment:
       PUID: 1000
       PGID: 1000
-      DB_CONNECTION: sqlite
-      DB_HOST: /config/database.sqlite
+      DB_CONNECTION: pgsql
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: ${SPEEDTEST_DB}
+      DB_USERNAME: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - 8081:80
       - 8443:443
     volumes:
       - ${VOLUMES_PATH}/utility-services/speedtest/config:/config
+    networks:
+      - db-network
     restart: unless-stopped
     
   homepage:
@@ -171,7 +176,7 @@ services:
     environment:
       PUID: 1000
       PGID: 1000
-      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: ${GHOSTFOLIO_DATABASE_URL}
       NODE_ENV: production
       REDIS_HOST: redis
       REDIS_PASSWORD: ${REDIS_PASSWORD}
