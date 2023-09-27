@@ -77,7 +77,7 @@ services:
     restart: unless-stopped
 
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin:arm32v7-10.8.10
+    image: ghcr.io/linuxserver/jellyfin:10.8.11
     container_name: jellyfin
     environment:
       - PUID=1000
@@ -92,8 +92,6 @@ services:
       - ${MEDIA_HDD_PATH}/movies:/data/movies
       - ${MEDIA_HDD_PATH}/anime:/data/anime
       - ${MEDIA_HDD_PATH}/music:/data/music
-      # - /home/pi/ssl:/ssl
-      # - ${VOLUMES_PATH}/media-management/jellyfin-plugins:/jellyfin/jellyfin-web:ro
     # - /opt/vc/lib:/opt/vc/lib #optional
     ports:
       - 8096:8096
