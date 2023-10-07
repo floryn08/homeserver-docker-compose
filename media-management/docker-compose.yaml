@@ -119,7 +119,7 @@ services:
       - proxy-network
 
   nextcloud:
-    image: ghcr.io/linuxserver/nextcloud:27.1.1
+    image: ghcr.io/linuxserver/nextcloud:27.1.2
     container_name: nextcloud
     environment:
       - PUID=1000
@@ -157,7 +157,7 @@ services:
       - media-management-network
       
   tvheadend:
-    image: ghcr.io/linuxserver/tvheadend:arm64v8-fe4df311-ls185
+    image: ghcr.io/linuxserver/tvheadend:arm64v8-51adc040-ls187
     container_name: tvheadend
     environment:
       - PUID=1000
@@ -194,7 +194,7 @@ services:
      
   wizarr:
     container_name: wizarr
-    image: ghcr.io/wizarrrr/wizarr:3.0.1
+    image: ghcr.io/wizarrrr/wizarr:3.4.1
     ports:
       - 5690:5690
     environment:
