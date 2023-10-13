@@ -197,6 +197,10 @@ services:
     image: ghcr.io/wizarrrr/wizarr:3.4.1
     ports:
       - 5690:5690
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: ${TIMEZONE}
     volumes:
       - ${VOLUMES_PATH}/media-management/wizarr/database:/data/database
     restart: unless-stopped
