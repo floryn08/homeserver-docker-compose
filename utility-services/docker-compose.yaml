@@ -155,7 +155,7 @@ services:
     restart: unless-stopped
     
   homepage:
-    image: ghcr.io/gethomepage/homepage:v0.7.1
+    image: ghcr.io/gethomepage/homepage:v0.7.3
     container_name: homepage
     environment:
       - TZ=${TIMEZONE}
