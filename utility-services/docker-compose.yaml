@@ -110,7 +110,7 @@ services:
     
   scrutiny:
     container_name: scrutiny
-    image: ghcr.io/analogj/scrutiny:v0.7.1-omnibus
+    image: analogj/scrutiny:v0.7.1-omnibus
     cap_add:
       - SYS_RAWIO
     ports:
@@ -134,7 +134,7 @@ services:
       start_period: 20s
       
   speedtest-tracker:
-    image: ghcr.io/alexjustesen/speedtest-tracker:v0.13.1
+    image: alexjustesen/speedtest-tracker:v0.13.1
     container_name: speedtest-tracker
     environment:
       PUID: 1000
@@ -155,7 +155,7 @@ services:
     restart: unless-stopped
     
   homepage:
-    image: ghcr.io/gethomepage/homepage:v0.7.3
+    image: gethomepage/homepage:v0.7.3
     container_name: homepage
     environment:
       - TZ=${TIMEZONE}
