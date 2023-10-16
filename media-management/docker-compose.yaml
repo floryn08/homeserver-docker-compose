@@ -43,7 +43,7 @@ services:
       - media-management-network
 
   bazarr:
-    image: ghcr.io/linuxserver/bazarr:1.3.0
+    image: ghcr.io/linuxserver/bazarr:1.3.1
     container_name: bazarr
     environment:
       - PUID=1000
@@ -157,7 +157,7 @@ services:
       - media-management-network
       
   tvheadend:
-    image: ghcr.io/linuxserver/tvheadend:arm64v8-51adc040-ls187
+    image: ghcr.io/linuxserver/tvheadend:arm64v8-51adc040-ls188
     container_name: tvheadend
     environment:
       - PUID=1000
