@@ -5,16 +5,16 @@
   ],
   "packageRules": [
     {
-      "packagePatterns": ["^ghcr.io\\/linuxserver\\/", "^ghcr.io\\/hotio\\/"],
+      "packagePatterns": ["^linuxserver\\/", "^ghcr.io\\/hotio\\/"],
       "versionScheme": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$"
     },
     {
-      "packagePatterns": ["^ghcr.io\\/linuxserver\\/prowlarr"],
+      "packagePatterns": ["^linuxserver\\/prowlarr"],
       "versionScheme": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$",
       "allowedVersions": "/^(\\d{1,3}\\.)(\\d*\\.)*\\d{1,3}$/"
     },
     {
-      "packagePatterns": ["^ghcr.io\\/linuxserver\\/tvheadend"],
+      "packagePatterns": ["^linuxserver\\/tvheadend"],
       "versionScheme": "regex:^arm64v8-(?<compatibility>)?.*-ls(?<minor>\\d+)?$"
     },
     {
