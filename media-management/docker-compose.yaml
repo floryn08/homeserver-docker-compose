@@ -11,7 +11,7 @@ networks:
 services:
 
   sonarr:
-    image: ghcr.io/linuxserver/sonarr:3.0.10
+    image: linuxserver/sonarr:3.0.10
     container_name: sonarr
     environment:
       - PUID=1000
@@ -43,7 +43,7 @@ services:
       - media-management-network
 
   bazarr:
-    image: ghcr.io/linuxserver/bazarr:1.3.1
+    image: linuxserver/bazarr:1.3.1
     container_name: bazarr
     environment:
       - PUID=1000
@@ -61,7 +61,7 @@ services:
       - media-management-network
 
   deluge:
-    image: ghcr.io/linuxserver/deluge:2.1.1
+    image: linuxserver/deluge:2.1.1
     container_name: deluge
     # network_mode: host
     ports:
@@ -77,7 +77,7 @@ services:
     restart: unless-stopped
 
   jellyfin:
-    image: ghcr.io/linuxserver/jellyfin:10.8.11
+    image: linuxserver/jellyfin:10.8.11
     container_name: jellyfin
     environment:
       - PUID=1000
@@ -119,7 +119,7 @@ services:
       - proxy-network
 
   nextcloud:
-    image: ghcr.io/linuxserver/nextcloud:27.1.2
+    image: linuxserver/nextcloud:27.1.2
     container_name: nextcloud
     environment:
       - PUID=1000
@@ -142,7 +142,7 @@ services:
       - proxy-network
      
   prowlarr:
-    image: ghcr.io/linuxserver/prowlarr:1.8.6
+    image: linuxserver/prowlarr:1.8.6
     container_name: prowlarr
     environment:
       - PUID=1000
@@ -157,7 +157,7 @@ services:
       - media-management-network
       
   tvheadend:
-    image: ghcr.io/linuxserver/tvheadend:arm64v8-51adc040-ls188
+    image: linuxserver/tvheadend:arm64v8-51adc040-ls188
     container_name: tvheadend
     environment:
       - PUID=1000
@@ -194,7 +194,7 @@ services:
      
   wizarr:
     container_name: wizarr
-    image: ghcr.io/wizarrrr/wizarr:3.4.1
+    image: wizarrrr/wizarr:3.4.1
     ports:
       - 5690:5690
     environment:
