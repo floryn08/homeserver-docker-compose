@@ -125,7 +125,7 @@ services:
     restart: unless-stopped
 
   ddclient:
-    image: ghcr.io/linuxserver/ddclient:3.10.0
+    image: linuxserver/ddclient:3.10.0
     container_name: ddclient
     environment:
       - PUID=1000
@@ -138,7 +138,7 @@ services:
   duplicacy:
     container_name: duplicacy
     hostname: duplicacy
-    image: ghcr.io/hotio/duplicacy:release-1.7.2
+    image: hotio/duplicacy:release-1.7.2
     ports:
       - "3875:3875"
     environment:
