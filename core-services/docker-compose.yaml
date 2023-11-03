@@ -111,7 +111,7 @@ services:
     restart: unless-stopped
 
   filebrowser:
-    image: filebrowser/filebrowser:v2.25.0
+    image: filebrowser/filebrowser:v2.26.0
     container_name: filebrowser
     volumes:
       - ${VOLUMES_PATH}/core-services/filebrowser/database.db:/database.db
@@ -125,7 +125,7 @@ services:
     restart: unless-stopped
 
   ddclient:
-    image: linuxserver/ddclient:3.11.0
+    image: linuxserver/ddclient:3.11.1
     container_name: ddclient
     environment:
       - PUID=1000
@@ -156,7 +156,7 @@ services:
     restart: unless-stopped
     
   cloudflare:
-    image: cloudflare/cloudflared:2023.8.2
+    image: cloudflare/cloudflared:2023.10.0
     container_name: cloudflare
     environment:
       - PUID=1000
