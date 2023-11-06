@@ -72,7 +72,7 @@ services:
       - services
 
   vaultwarden:
-    image: vaultwarden/server:1.29.2
+    image: vaultwarden/server:1.30.0
     container_name: vaultwarden
     restart: unless-stopped
     environment:
@@ -170,7 +170,7 @@ services:
     
   ghostfolio:
     container_name: ghostfolio
-    image: ghostfolio/ghostfolio:2.17.0
+    image: ghostfolio/ghostfolio:2.18.0
     ports:
       - 3333:3333
     environment:
