@@ -43,7 +43,7 @@ services:
       - media-management-network
 
   bazarr:
-    image: linuxserver/bazarr:1.3.1
+    image: linuxserver/bazarr:1.4.0
     container_name: bazarr
     environment:
       - PUID=1000
@@ -77,7 +77,7 @@ services:
     restart: unless-stopped
 
   jellyfin:
-    image: linuxserver/jellyfin:10.8.12
+    image: linuxserver/jellyfin:10.8.13
     container_name: jellyfin
     environment:
       - PUID=1000
@@ -119,7 +119,7 @@ services:
       - proxy-network
 
   nextcloud:
-    image: linuxserver/nextcloud:27.1.3
+    image: linuxserver/nextcloud:27.1.4
     container_name: nextcloud
     environment:
       - PUID=1000
@@ -142,7 +142,7 @@ services:
       - proxy-network
      
   prowlarr:
-    image: linuxserver/prowlarr:1.9.4
+    image: linuxserver/prowlarr:1.10.5
     container_name: prowlarr
     environment:
       - PUID=1000
@@ -157,7 +157,7 @@ services:
       - media-management-network
       
   tvheadend:
-    image: linuxserver/tvheadend:arm64v8-62adbebf-ls192
+    image: linuxserver/tvheadend:arm64v8-bc30a74d-ls194
     container_name: tvheadend
     environment:
       - PUID=1000
@@ -194,7 +194,7 @@ services:
      
   wizarr:
     container_name: wizarr
-    image: ghcr.io/wizarrrr/wizarr:3.4.8
+    image: ghcr.io/wizarrrr/wizarr:3.5.2
     ports:
       - 5690:5690
     environment:
