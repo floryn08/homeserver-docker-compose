@@ -157,7 +157,7 @@ services:
       - media-management-network
       
   tvheadend:
-    image: linuxserver/tvheadend:arm64v8-bc30a74d-ls194
+    image: linuxserver/tvheadend:arm64v8-d85c957a-ls196
     container_name: tvheadend
     environment:
       - PUID=1000
