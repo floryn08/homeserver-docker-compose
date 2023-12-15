@@ -119,7 +119,7 @@ services:
       - proxy-network
 
   nextcloud:
-    image: linuxserver/nextcloud:27.1.4
+    image: linuxserver/nextcloud:28.0.0
     container_name: nextcloud
     environment:
       - PUID=1000
