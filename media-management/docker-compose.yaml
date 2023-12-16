@@ -7,6 +7,8 @@ networks:
     external: true
   media-management-network:
     external: true
+  db-network:
+    external: true
 
 services:
 
@@ -125,6 +127,12 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=${TIMEZONE}
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=${NEXTCLOUD_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - REDIS_HOST=redis
+      - REDIS_HOST_PASSWORD=${REDIS_PASSWORD}
     volumes:
       # - /home/pi/ssl:/config/keys
       - ${VOLUMES_PATH}/media-management/nextcloud:/config
@@ -140,6 +148,7 @@ services:
     networks:
       - media-management-network
       - proxy-network
+      - db-network
      
   prowlarr:
     image: linuxserver/prowlarr:1.10.5
