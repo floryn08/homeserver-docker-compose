@@ -136,20 +136,14 @@ services:
       traefik.enable: true
       traefik.http.routers.nextcloud.rule: Host(`nextcloud.${DOMAIN2}`)
       traefik.http.routers.nextcloud.entrypoints: web
-      traefik.http.routers.nextcloud.middlewares: 'nextcloud_redirectregex,nextcloud_nginx'
+      traefik.http.routers.nextcloud.middlewares: 'nextcloud_redirectregex,nextcloud_sts'
       traefik.http.services.nextcloud.loadbalancer.server.port: 80
-      traefik.http.middlewares.nextcloud_nginx.headers.referrerPolicy: "no-referrer"
-      traefik.http.middlewares.nextcloud_nginx.headers.SSLRedirect: "true"
-      traefik.http.middlewares.nextcloud_nginx.headers.STSSeconds: "315360000"
-      traefik.http.middlewares.nextcloud_nginx.headers.browserXSSFilter: "true"
-      traefik.http.middlewares.nextcloud_nginx.headers.contentTypeNosniff: "true"
-      traefik.http.middlewares.nextcloud_nginx.headers.forceSTSHeader: "true"
-      traefik.http.middlewares.nextcloud_nginx.headers.STSIncludeSubdomains: "true"
-      traefik.http.middlewares.nextcloud_nginx.headers.STSPreload: "true"
-      traefik.http.middlewares.nextcloud_nginx.headers.customFrameOptionsValue: "SAMEORIGIN"
+      traefik.http.middlewares.nextcloud_sts.headers.STSSeconds: "315360000"
+      traefik.http.middlewares.nextcloud_sts.headers.STSIncludeSubdomains: "true"
+      traefik.http.middlewares.nextcloud_sts.headers.STSPreload: "true"
       traefik.http.middlewares.nextcloud_redirectregex.redirectregex.permanent: true
-      traefik.http.middlewares.nextcloud_redirectregex.redirectregex.regex: 'https://(.*)/.well-known/(?:card|cal)dav'
-      traefik.http.middlewares.nextcloud_redirectregex.redirectregex.replacement: 'https://$${1}/remote.php/dav'
+      traefik.http.middlewares.nextcloud_redirectregex.redirectregex.regex: 'https://(.*)/.well-known/(card|cal)dav'
+      traefik.http.middlewares.nextcloud_redirectregex.redirectregex.replacement: 'https://$$1/remote.php/dav/'
     networks:
       - media-management-network
       - proxy-network
