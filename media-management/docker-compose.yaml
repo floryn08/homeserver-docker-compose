@@ -236,7 +236,7 @@ services:
       - media-management-network
       - cloudflare-network
     healthcheck:
-      test: wget --connect-timeout=15 --output-document - --quiet http://localhost:5055/api/v1/status | grep -q '"restartRequired":false' || exit 1
+      test: wget --output-document - --quiet http://localhost:5055/api/v1/status | grep -q '"restartRequired":false' || exit 1
       interval: 10s
       timeout: 5s
       retries: 5   
