@@ -130,11 +130,11 @@ services:
     networks:
       - mqtt-network
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "timeout -t 5 mosquitto_sub -t '$$SYS/#' -C 1 | grep -v Error || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    # healthcheck:
+    #   test: ["CMD", "timeout -t 5 mosquitto_sub -t '$$SYS/#' -C 1 | grep -v Error || exit 1"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
       
   filebrowser:
     image: filebrowser/filebrowser:v2.26.0
