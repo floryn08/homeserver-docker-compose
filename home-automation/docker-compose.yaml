@@ -24,6 +24,11 @@ services:
     restart: unless-stopped
     privileged: true
     network_mode: host
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8123" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   grocy:
     image: linuxserver/grocy:4.0.3
@@ -40,6 +45,11 @@ services:
     networks:
       - home-automation-network
       - cloudflare-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
       
   esphome:
     container_name: esphome
@@ -52,3 +62,8 @@ services:
     ports:
       - 6052:6052
       - 6123:6123
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6052" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
