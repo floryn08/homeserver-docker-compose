@@ -30,6 +30,7 @@ services:
     container_name: traefik
     command:
       - --log.level=DEBUG
+      - --ping=true
       - --api.insecure=true
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
@@ -50,7 +51,12 @@ services:
     networks:
       - proxy-network
     restart: unless-stopped
-
+    healthcheck:
+      test: ["CMD", "traefik", "healthcheck", "--ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      
   redis:
     image: redis:7.2.3-alpine
     container_name: redis
@@ -61,7 +67,12 @@ services:
     networks:
       - db-network
     restart: unless-stopped
-
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      
   postgres:
     image: postgres:15.5-alpine
     container_name: postgres
@@ -76,6 +87,11 @@ services:
     networks:
       - db-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   pgadmin:
     image: dpage/pgadmin4:7.8
@@ -91,6 +107,11 @@ services:
     networks:
       - db-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-O", "-", "http://localhost:80/misc/ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   mqtt:
     image: eclipse-mosquitto:2.0.18
@@ -109,7 +130,12 @@ services:
     networks:
       - mqtt-network
     restart: unless-stopped
-
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      
   filebrowser:
     image: filebrowser/filebrowser:v2.26.0
     container_name: filebrowser
@@ -123,7 +149,12 @@ services:
     ports:
       - 8888:80
     restart: unless-stopped
-
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  
   ddclient:
     image: linuxserver/ddclient:3.11.2
     container_name: ddclient
@@ -154,6 +185,11 @@ services:
       - /home/pi:/source
       - ${STORAGE_HDD_PATH}:/storage
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3875" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     
   cloudflare:
     image: cloudflare/cloudflared:2023.10.0
