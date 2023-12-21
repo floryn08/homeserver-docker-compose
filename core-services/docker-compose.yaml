@@ -131,7 +131,7 @@ services:
       - mqtt-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-O", "-", "http://localhost:1883" ]
+      test: ["CMD", "timeout -t 5 mosquitto_sub -t '$$SYS/#' -C 1 | grep -v Error || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
