@@ -131,7 +131,7 @@ services:
       - mqtt-network
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080" ]
+      test: ["CMD", "wget", "-O", "-", "http://localhost:8080" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -150,7 +150,7 @@ services:
       - 8888:80
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8888" ]
+      test: ["CMD", "curl", "-f", "http://localhost:8888/health" ]
       interval: 10s
       timeout: 5s
       retries: 5
