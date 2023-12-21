@@ -27,6 +27,11 @@ services:
     restart: unless-stopped
     networks:
       - media-management-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8989/ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   radarr:
     image: linuxserver/radarr:5.1.3
@@ -43,6 +48,11 @@ services:
     restart: unless-stopped
     networks:
       - media-management-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7878/ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5    
 
   bazarr:
     image: linuxserver/bazarr:1.4.0
@@ -61,6 +71,11 @@ services:
     restart: unless-stopped
     networks:
       - media-management-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6767/api/system/health", "--header", "X-API-KEY:${BAZARR_API_KEY}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5    
 
   deluge:
     image: linuxserver/deluge:2.1.1
@@ -77,6 +92,11 @@ services:
       - ${VOLUMES_PATH}/media-management/deluge:/config
       - ${MEDIA_HDD_PATH}:/media
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8112" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5    
 
   jellyfin:
     image: linuxserver/jellyfin:10.8.13
@@ -119,6 +139,11 @@ services:
     networks:
       - media-management-network
       - proxy-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8096/jellyfin/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5    
 
   nextcloud:
     image: linuxserver/nextcloud:28.0.0
@@ -149,6 +174,11 @@ services:
       - media-management-network
       - proxy-network
       - db-network
+    healthcheck:
+      test: curl -sSf 'http://localhost/status.php' | grep '"installed":true' | grep '"maintenance":false' | grep '"needsDbUpgrade":false' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
      
   prowlarr:
     image: linuxserver/prowlarr:1.10.5
@@ -164,6 +194,11 @@ services:
     restart: unless-stopped
     networks:
       - media-management-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9696/ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5   
       
   tvheadend:
     image: linuxserver/tvheadend:arm64v8-d85c957a-ls196
@@ -200,6 +235,11 @@ services:
     networks:
       - media-management-network
       - cloudflare-network
+    healthcheck:
+      test: curl --connect-timeout 15 --silent --show-error --fail http://localhost:5055/api/v1/status | grep -q '"restartRequired":false' || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5   
      
   wizarr:
     container_name: wizarr
@@ -216,4 +256,8 @@ services:
     networks:
       - media-management-network
       - cloudflare-network
-
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5690" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5   
