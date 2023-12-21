@@ -71,6 +71,9 @@ services:
     restart: unless-stopped
     networks:
       - media-management-network
+    depends_on:
+      - sonarr
+      - radarr
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:6767/api/system/health", "--header", "X-API-KEY:${BAZARR_API_KEY}" ]
       interval: 10s
