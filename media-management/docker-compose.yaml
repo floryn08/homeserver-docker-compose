@@ -264,3 +264,17 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5   
+
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:4.1.0
+    container_name: sabnzbd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${VOLUMES_PATH}/media-management/sabnzbd/config:/config
+      - ${MEDIA_HDD_PATH}:/media
+    ports:
+      - 8084:8080
+    restart: unless-stopped
