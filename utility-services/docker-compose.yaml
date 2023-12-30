@@ -186,3 +186,27 @@ services:
     networks:
       - db-network
     restart: unless-stopped
+
+  paperless-ngx:
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.2.1
+    container_name: paperless-ngx
+    environment:
+      USERMAP_UID: 1000
+      USERMAP_GID: 1000
+      PAPERLESS_TIME_ZONE: ${TIMEZONE}
+      PAPERLESS_REDIS: redis://redis
+    volumes:
+      - ${MEDIA_HDD_PATH}/documents/paperless-ngx/data:/usr/src/paperless/data
+      - ${MEDIA_HDD_PATH}/documents/paperless-ngx/media:/usr/src/paperless/media
+      - ${MEDIA_HDD_PATH}/documents/paperless-ngx/export:/usr/src/paperless/export
+      - ${MEDIA_HDD_PATH}/documents/paperless-ngx/consume:/usr/src/paperless/consume
+    ports:
+      - 8085:8000
+    networks:
+      - db-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "-S", "--max-time", "2", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
