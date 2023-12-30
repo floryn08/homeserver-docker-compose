@@ -134,7 +134,7 @@ services:
       start_period: 20s
       
   speedtest-tracker:
-    image: ghcr.io/alexjustesen/speedtest-tracker:v0.14.1
+    image: ghcr.io/alexjustesen/speedtest-tracker:v0.14.2
     container_name: speedtest-tracker
     environment:
       PUID: 1000
@@ -155,7 +155,7 @@ services:
     restart: unless-stopped
     
   homepage:
-    image: ghcr.io/gethomepage/homepage:v0.8.3
+    image: ghcr.io/gethomepage/homepage:v0.8.4
     container_name: homepage
     environment:
       - TZ=${TIMEZONE}
@@ -170,7 +170,7 @@ services:
     
   ghostfolio:
     container_name: ghostfolio
-    image: ghostfolio/ghostfolio:2.31.0
+    image: ghostfolio/ghostfolio:2.32.0
     ports:
       - 3333:3333
     environment:
