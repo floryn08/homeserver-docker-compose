@@ -12,7 +12,7 @@ services:
 
   homeassistant:
     container_name: homeassistant
-    image: ghcr.io/home-assistant/home-assistant:2023.12.3
+    image: ghcr.io/home-assistant/home-assistant:2023.12.4
     environment:
       - PUID=1000
       - PGID=1000
@@ -53,7 +53,7 @@ services:
       
   esphome:
     container_name: esphome
-    image: esphome/esphome:2023.12.0
+    image: esphome/esphome:2023.12.5
     volumes:
       - ${VOLUMES_PATH}/home-automation/esphome/config:/config
       - /etc/localtime:/etc/localtime:ro
