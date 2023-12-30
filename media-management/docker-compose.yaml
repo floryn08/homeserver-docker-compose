@@ -34,7 +34,7 @@ services:
       retries: 5
 
   radarr:
-    image: linuxserver/radarr:5.1.3
+    image: linuxserver/radarr:5.2.6
     container_name: radarr
     environment:
       - PUID=1000
@@ -149,7 +149,7 @@ services:
       retries: 5    
 
   nextcloud:
-    image: linuxserver/nextcloud:28.0.0
+    image: linuxserver/nextcloud:28.0.1
     container_name: nextcloud
     environment:
       - PUID=1000
@@ -204,7 +204,7 @@ services:
       retries: 5   
       
   tvheadend:
-    image: linuxserver/tvheadend:arm64v8-d85c957a-ls196
+    image: linuxserver/tvheadend:arm64v8-fd8b9e8b-ls197
     container_name: tvheadend
     environment:
       - PUID=1000
