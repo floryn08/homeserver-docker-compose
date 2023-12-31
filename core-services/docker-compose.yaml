@@ -184,7 +184,7 @@ services:
       - ${BACKUP_HDD_PATH}/backups:/backups
       - /home/pi:/source
       - ${STORAGE_HDD_PATH}:/storage
-      - ${MEDIA_HDD_PATH}:/media
+      - ${MEDIA_HDD_PATH}:/local-media
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3875" ]
