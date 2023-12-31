@@ -195,6 +195,8 @@ services:
       USERMAP_GID: 1000
       PAPERLESS_TIME_ZONE: ${TIMEZONE}
       PAPERLESS_REDIS: redis://redis
+      PAPERLESS_OCR_LANGUAGES: ron #install romanian OCR
+      PAPERLESS_OCR_LANGUAGE: ron #set default ocr language
     volumes:
       - ${MEDIA_HDD_PATH}/documents/paperless-ngx/data:/usr/src/paperless/data
       - ${MEDIA_HDD_PATH}/documents/paperless-ngx/media:/usr/src/paperless/media
