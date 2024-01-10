@@ -58,7 +58,7 @@ services:
       retries: 5
       
   redis:
-    image: redis:7.2.3-alpine
+    image: redis:7.2.4-alpine
     container_name: redis
     environment:
       POSTGRES_PASSWORD: ${REDIS_PASSWORD}
@@ -137,7 +137,7 @@ services:
     #   retries: 5
       
   filebrowser:
-    image: filebrowser/filebrowser:v2.26.0
+    image: filebrowser/filebrowser:v2.27.0
     container_name: filebrowser
     volumes:
       - ${VOLUMES_PATH}/core-services/filebrowser/database.db:/database.db
