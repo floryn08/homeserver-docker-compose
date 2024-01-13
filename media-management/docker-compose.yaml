@@ -204,7 +204,7 @@ services:
       retries: 5   
       
   tvheadend:
-    image: linuxserver/tvheadend:arm64v8-fd8b9e8b-ls197
+    image: linuxserver/tvheadend:arm64v8-c9b38a81-ls198
     container_name: tvheadend
     environment:
       - PUID=1000
