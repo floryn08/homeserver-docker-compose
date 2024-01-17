@@ -53,7 +53,7 @@ services:
       
   esphome:
     container_name: esphome
-    image: esphome/esphome:2023.12.6
+    image: esphome/esphome:2023.12.7
     volumes:
       - ${VOLUMES_PATH}/home-automation/esphome/config:/config
       - /etc/localtime:/etc/localtime:ro
