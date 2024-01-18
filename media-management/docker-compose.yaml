@@ -184,7 +184,7 @@ services:
       retries: 10
      
   prowlarr:
-    image: linuxserver/prowlarr:1.11.4
+    image: linuxserver/prowlarr:1.12.2
     container_name: prowlarr
     environment:
       - PUID=1000
