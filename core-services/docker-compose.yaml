@@ -76,6 +76,7 @@ services:
   postgres:
     image: postgres:15.5-alpine
     container_name: postgres
+    user: "1000:1000"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
