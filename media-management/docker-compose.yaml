@@ -149,12 +149,13 @@ services:
       retries: 5    
 
   jellystat:
-    image: cyfershepard/jellystat:1.0.9
+    image: cyfershepard/jellystat:unstable
     container_name: jellystat
     user: "1000:1000"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DATABASE: ${JELLYSTAT_DB}
       POSTGRES_IP: postgres
       POSTGRES_PORT: 5432
       JWT_SECRET: ${JELLYSTAT_JWT}
