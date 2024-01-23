@@ -150,6 +150,7 @@ services:
 
   jellystat:
     image: cyfershepard/jellystat:1.0.9
+    container_name: jellystat
     user: "1000:1000"
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
