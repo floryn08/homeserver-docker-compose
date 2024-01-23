@@ -161,6 +161,8 @@ services:
       JWT_SECRET: ${JELLYSTAT_JWT}
       TZ: ${TIMEZONE}  
     restart: unless-stopped
+    volumes:
+      - ${VOLUMES_PATH}/media-management/jellystat/backup:/app/backend/backup-data # Mounting the volume
     ports:
       - "8087:3000"
     networks:
