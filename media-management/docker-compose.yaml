@@ -155,7 +155,7 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_IP: ${JELLYSTAT_DB}
+      POSTGRES_IP: postgres
       POSTGRES_PORT: 5432
       JWT_SECRET: ${JELLYSTAT_JWT}
       TZ: ${TIMEZONE}  
