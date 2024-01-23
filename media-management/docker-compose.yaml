@@ -159,6 +159,7 @@ services:
       POSTGRES_PORT: 5432
       JWT_SECRET: ${JELLYSTAT_JWT}
       TZ: ${TIMEZONE}  
+    restart: unless-stopped
     ports:
       - "8087:3000"
     networks:
