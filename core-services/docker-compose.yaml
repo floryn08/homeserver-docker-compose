@@ -14,7 +14,7 @@ services:
 
   ofelia:
     container_name: ofelia
-    image: mcuadros/ofelia:v0.3.9
+    image: mcuadros/ofelia:v3.0.8
     command: daemon --config=/config/config.ini
     environment:
       - PUID=1000
