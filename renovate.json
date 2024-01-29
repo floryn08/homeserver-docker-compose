@@ -16,7 +16,7 @@
     {
       "packagePatterns": ["^mcuadros\\/ofelia"],
       "versionScheme": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$",
-      "allowedVersions": "/^(?!3)(?<rest>.*)$/"
+      "allowedVersions": "/^(?!3)(\\d*\\.)*\\d{1,3}$/"
     },
     {
       "packagePatterns": ["^linuxserver\\/tvheadend"],
