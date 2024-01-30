@@ -229,26 +229,26 @@ services:
       timeout: 5s
       retries: 5   
       
-  tvheadend:
-    image: linuxserver/tvheadend:arm64v8-7b762336-ls199
-    container_name: tvheadend
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=${TIMEZONE}
-      - RUN_OPTS= #optional
-    volumes:
-      - ${VOLUMES_PATH}/media-management/tvheadend/data:/config
-      - ${VOLUMES_PATH}/media-management/tvheadend/recordings:/recordings
-    ports:
-      - 9981:9981
-      - 9982:9982
-    devices:
-      - /dev/dri:/dev/dri #optional
-      - /dev/dvb:/dev/dvb #optional
-    restart: unless-stopped
-    networks:
-      - media-management-network
+  # tvheadend:
+  #   image: linuxserver/tvheadend:arm64v8-7b762336-ls199
+  #   container_name: tvheadend
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=${TIMEZONE}
+  #     - RUN_OPTS= #optional
+  #   volumes:
+  #     - ${VOLUMES_PATH}/media-management/tvheadend/data:/config
+  #     - ${VOLUMES_PATH}/media-management/tvheadend/recordings:/recordings
+  #   ports:
+  #     - 9981:9981
+  #     - 9982:9982
+  #   devices:
+  #     - /dev/dri:/dev/dri #optional
+  #     - /dev/dvb:/dev/dvb #optional
+  #   restart: unless-stopped
+  #   networks:
+  #     - media-management-network
      
   jellyseerr:
     image: fallenbagel/jellyseerr:1.7.0
