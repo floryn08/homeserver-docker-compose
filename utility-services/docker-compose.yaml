@@ -124,8 +124,8 @@ services:
     restart: unless-stopped
     devices:
       - /dev/sda
-      - /dev/sdb
-      - /dev/sdc
+      # - /dev/sdb
+      # - /dev/sdc
     healthcheck:
       test: curl --connect-timeout 15 --silent --show-error --fail http://localhost:8080/api/health | grep -q 'true'
       interval: 60s
