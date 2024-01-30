@@ -97,7 +97,6 @@ services:
   pgadmin:
     image: dpage/pgadmin4:8.2
     container_name: pgadmin
-    user: "1000:1000"
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
