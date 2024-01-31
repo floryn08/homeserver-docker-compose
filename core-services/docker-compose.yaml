@@ -183,7 +183,7 @@ services:
       - ${VOLUMES_PATH}/core-services/duplicacy/cache:/cache
       - ${VOLUMES_PATH}/core-services/duplicacy/logs:/logs
       - ${BACKUP_HDD_PATH}/backups:/backups
-      - /home/pi:/source
+      - ${SOURCE_PATH}:/source
       - ${STORAGE_HDD_PATH}:/storage
       - ${MEDIA_HDD_PATH}:/local-media
     restart: unless-stopped
