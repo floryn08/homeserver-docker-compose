@@ -72,7 +72,7 @@ services:
       - services
 
   vaultwarden:
-    image: vaultwarden/server:1.30.2
+    image: vaultwarden/server:1.30.3
     container_name: vaultwarden
     restart: unless-stopped
     environment:
@@ -134,7 +134,7 @@ services:
       start_period: 20s
       
   speedtest-tracker:
-    image: ghcr.io/alexjustesen/speedtest-tracker:v0.14.4
+    image: ghcr.io/alexjustesen/speedtest-tracker:v0.14.6
     container_name: speedtest-tracker
     environment:
       PUID: 1000
