@@ -55,7 +55,7 @@ services:
       retries: 5    
 
   bazarr:
-    image: linuxserver/bazarr:1.4.0
+    image: linuxserver/bazarr:1.4.1
     container_name: bazarr
     environment:
       - PUID=1000
@@ -175,7 +175,7 @@ services:
       retries: 5 
 
   nextcloud:
-    image: linuxserver/nextcloud:28.0.1
+    image: linuxserver/nextcloud:28.0.2
     container_name: nextcloud
     environment:
       - PUID=1000
@@ -292,7 +292,7 @@ services:
       retries: 5   
 
   sabnzbd:
-    image: lscr.io/linuxserver/sabnzbd:4.2.1
+    image: lscr.io/linuxserver/sabnzbd:4.2.2
     container_name: sabnzbd
     environment:
       - PUID=1000
