@@ -30,7 +30,7 @@ services:
       - ${VOLUMES_PATH}/game-servers/minecraft:/data
       - /etc/localtime:/etc/localtime:ro 
       - /etc/timezone:/etc/timezone:ro
-    restart: never
+    restart: unless-stopped
  
   valheim: 
     container_name: valheim
@@ -50,7 +50,7 @@ services:
       SUPERVISOR_HTTP: false
       SERVER_ARGS: -crossplay
       ADMINLIST_IDS: ${VALHEIM_ADMINS}
-    restart: never
+    restart: unless-stopped
 
   valheim-server-discord-bot:
     container_name: valheim-server-discord-bot
