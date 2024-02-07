@@ -24,39 +24,130 @@ Create networks with `docker network create <network_name>`
 
 ## Services:
 
-- Core services
-  - Ofelia
-  - Traefik
-  - Redis
-  - Postgres
-  - Pgadmin
-  - Mqtt
-  - Filebrowser
-  - Ddclient
-  - Duplicacy
-  - Cloudflare
-- Media management
-  - Sonarr
-  - Radarr
-  - Bazarr
-  - Deluge
-  - Jellyfin
-  - Nextcloud
-  - Prowlarr
-  - TvHeadEnd
-  - Jellyseer
-  - Wizarr
-- Utility services
-  - Pihole
-  - Wireguard
-  - Vaultwarden
-  - Cups
-  - Scrutiny
-  - Speedtest
-  - Dockerproxy
-  - Homepage
-  - Ghostfolio
-- Home automation
-  - Home assistant
-  - Grocy
-  - EspHome
+<table>
+   <tr>
+      <th>Stack Name</th>
+      <th>Container Name</th>
+   </tr>
+   <tr>
+      <td rowspan="2">AI Services</td>
+      <td>ollama</td>
+   </tr>
+   <tr>
+      <td>ollama-webui</td>
+   </tr>
+   <tr>
+      <td rowspan="10">Core Services</td>
+      <td>ofelia</td>
+   </tr>
+   <tr>
+      <td>cloudflare</td>
+   </tr>
+   <tr>
+      <td>ddclient</td>
+   </tr>
+   <tr>
+      <td>duplicacy</td>
+   </tr>
+   <tr>
+      <td>filebrowser</td>
+   </tr>
+   <tr>
+      <td>mqtt</td>
+   </tr>
+   <tr>
+      <td>pgadmin</td>
+   </tr>
+   <tr>
+      <td>postgres</td>
+   </tr>
+   <tr>
+      <td>redis</td>
+   </tr>
+   <tr>
+      <td>traefik</td>
+   </tr>
+   <tr>
+      <td rowspan="3">Game Services</td>
+      <td>minecraft</td>
+   </tr>
+   <tr>
+      <td>valheim</td>
+   </tr>
+   <tr>
+      <td>valheim server discord bot</td>
+   </tr>
+   <tr>
+      <td rowspan="3">Home Automation</td>
+      <td>homeassistant</td>
+   </tr>
+   <tr>
+      <td>grocy</td>
+   </tr>
+   <tr>
+      <td>esphome</td>
+   </tr>
+   <tr>
+      <td rowspan="12">Media Management</td>
+      <td>sonarr</td>
+   </tr>
+   <tr>
+      <td>radarr</td>
+   </tr>
+   <tr>
+      <td>bazarr</td>
+   </tr>
+   <tr>
+      <td>deluge</td>
+   </tr>
+   <tr>
+      <td>jellyfin</td>
+   </tr>
+   <tr>
+      <td>nextcloud</td>
+   </tr>
+   <tr>
+      <td>prowlarr</td>
+   </tr>
+   <tr>
+      <td>tvheadend</td>
+   </tr>
+   <tr>
+      <td>jellyseer</td>
+   </tr>
+   <tr>
+      <td>wizarr</td>
+   </tr>
+   <tr>
+      <td>jellystat</td>
+   </tr>
+   <tr>
+      <td>sabnzbd</td>
+   </tr>
+   <tr>
+      <td rowspan="8">Utility Services</td>
+      <td>pihole</td>
+   </tr>
+   <tr>
+      <td>wireguard</td>
+   </tr>
+   <tr>
+      <td>vaultwarden</td>
+   </tr>
+   <tr>
+      <td>cups</td>
+   </tr>
+   <tr>
+      <td>scrutiny</td>
+   </tr>
+   <tr>
+      <td>homepage</td>
+   </tr>
+   <tr>
+      <td>speedtest-tracker</td>
+   </tr>
+   <tr>
+      <td>paperless-ngx</td>
+   </tr>
+</table>
+
