@@ -30,7 +30,8 @@ services:
       - ${VOLUMES_PATH}/game-servers/minecraft:/data
       - /etc/localtime:/etc/localtime:ro 
       - /etc/timezone:/etc/timezone:ro
-
+    restart: never
+ 
   valheim: 
     container_name: valheim
     image: ghcr.io/lloesche/valheim-server:latest
@@ -49,6 +50,7 @@ services:
       SUPERVISOR_HTTP: false
       SERVER_ARGS: -crossplay
       ADMINLIST_IDS: ${VALHEIM_ADMINS}
+    restart: never
 
   valheim-server-discord-bot:
     container_name: valheim-server-discord-bot
@@ -63,5 +65,4 @@ services:
       SERVER_NAME: ${SERVER_NAME}
       JOIN_CODE_LOOP_COUNT: ${JOIN_CODE_LOOP_COUNT}
       JOIN_CODE_LOOP_TIMEOUT_MILLIS: ${JOIN_CODE_LOOP_TIMEOUT_MILLIS}
-
     restart: unless-stopped
