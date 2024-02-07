@@ -1,0 +1,67 @@
+version: '3.9'
+
+services:
+
+  minecraft:
+    container_name: minecraft
+    image: itzg/minecraft-server:2024.2.0
+    tty: true
+    stdin_open: true
+    ports:
+      - ${MINECRAFT_PORT}:25565
+    environment:
+      EULA: true
+      SERVER_NAME: ${SERVER_NAME}
+      MOTD: ${MOTD}
+      ONLINE_MODE: false
+      MAX_MEMORY: 8G
+      OVERRIDE_SERVER_PROPERTIES: true
+      ENABLE_AUTOPAUSE: true
+      AUTOPAUSE_TIMEOUT_EST: 300
+      AUTOPAUSE_TIMEOUT_INIT: 150
+      MAX_TICK_TIME: -1
+      ENFORCE_WHITELIST: ${ENFORCE_WHITELIST}
+      VERSION: ${MINECRAFT_VERSION}
+      TYPE: VANILLA
+      VIEW_DISTANCE: ${MINECRAFT_VIEW_DISTANCE}
+      WHITELIST: ${MINECRAFT_WHITELIST}
+      OPS: ${MINECRAFT_OPS}
+    volumes:
+      - ${VOLUMES_PATH}/game-servers/minecraft:/data
+      - /etc/localtime:/etc/localtime:ro 
+      - /etc/timezone:/etc/timezone:ro
+
+  valheim: 
+    container_name: valheim
+    image: ghcr.io/lloesche/valheim-server:latest
+    cap_add:
+      - sys_nice
+    volumes: 
+      - ${VOLUMES_PATH}/game-servers/valheim/config:/config
+      - ${VOLUMES_PATH}/game-servers/valheim/data:/opt/valheim
+      - /etc/localtime:/etc/localtime:ro 
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      SERVER_NAME: ${SERVER_NAME}
+      WORLD_NAME: ${SERVER_NAME}
+      SERVER_PASS: ${SERVER_PASSWORD}
+      SERVER_PUBLIC: false
+      SUPERVISOR_HTTP: false
+      SERVER_ARGS: -crossplay
+      ADMINLIST_IDS: ${VALHEIM_ADMINS}
+
+  valheim-server-discord-bot:
+    container_name: valheim-server-discord-bot
+    image: ghcr.io/floryn08/valheim-server-discord-bot:0.3.0
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
+      GUILD_ID: ${GUILD_ID}
+      PORTAINER_URL: ${PORTAINER_URL}
+      PORTAINER_API_KEY: ${PORTAINER_API_KEY}
+      CONTAINER_NAME: ${VALHEIM_CONTAINER_NAME}
+      SERVER_NAME: ${SERVER_NAME}
+      JOIN_CODE_LOOP_COUNT: ${JOIN_CODE_LOOP_COUNT}
+      JOIN_CODE_LOOP_TIMEOUT_MILLIS: ${JOIN_CODE_LOOP_TIMEOUT_MILLIS}
+
+    restart: unless-stopped
