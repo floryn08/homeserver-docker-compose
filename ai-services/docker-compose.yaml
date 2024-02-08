@@ -3,7 +3,7 @@ version: '3.9'
 services:
     ollama:
       container_name: ollama
-      image: ollama/ollama:0.1.23
+      image: ollama/ollama:0.1.24
       volumes:
           - ${VOLUMES_PATH}/ai-services/ollama:/root/.ollama
       ports:
