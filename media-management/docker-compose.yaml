@@ -101,6 +101,31 @@ services:
       timeout: 5s
       retries: 5    
 
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:4.6.3
+    container_name: qbittorrent
+    ports:
+      - 8383:8383
+      - 6881:6881
+      - 6881:6881/udp
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - WEBUI_PORT=8383
+    volumes:
+      - ${VOLUMES_PATH}/media-management/qbittorrent:/config
+      - ${MEDIA_HDD_PATH}/downloads:/downloads
+    restart: unless-stopped
+    networks:
+      - media-management-services
+    healthcheck:
+      test: curl --connect-timeout 15 --silent --show-error --fail http://localhost:8383 || exit 1
+      interval: 1m00s
+      timeout: 15s
+      retries: 3
+      start_period: 1m00s
+
   jellyfin:
     image: linuxserver/jellyfin:10.8.13
     container_name: jellyfin
