@@ -117,8 +117,6 @@ services:
       - ${VOLUMES_PATH}/media-management/qbittorrent:/config
       - ${MEDIA_HDD_PATH}/downloads:/downloads
     restart: unless-stopped
-    networks:
-      - media-management-services
     healthcheck:
       test: curl --connect-timeout 15 --silent --show-error --fail http://localhost:8383 || exit 1
       interval: 1m00s
