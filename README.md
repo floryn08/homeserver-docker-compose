@@ -68,7 +68,7 @@ Create networks with `docker network create <network_name>`
       <td>traefik</td>
    </tr>
    <tr>
-      <td rowspan="3">Game Services</td>
+      <td rowspan="3">Game Servers</td>
       <td>minecraft</td>
    </tr>
    <tr>
