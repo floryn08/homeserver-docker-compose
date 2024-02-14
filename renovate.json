@@ -44,6 +44,16 @@
       "matchFileNames": ["utility-services/docker-compose.yaml"],
       "groupName": "Utility services",
       "groupSlug": "utility-services"
+    },
+    {
+      "matchFileNames": ["ai-services/docker-compose.yaml"],
+      "groupName": "AI Services",
+      "groupSlug": "ai-services"
+    },
+    {
+      "matchFileNames": ["gamse-servers/docker-compose.yaml"],
+      "groupName": "Game Servers",
+      "groupSlug": "gamse-servers"
     }
   ]
 }
