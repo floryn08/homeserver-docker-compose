@@ -104,7 +104,7 @@ services:
       start_period: 1m00s
 
   jellyfin:
-    image: linuxserver/jellyfin:10.8.13
+    image: linuxserver/jellyfin:2021.12.16
     container_name: jellyfin
     environment:
       - PUID=1000
