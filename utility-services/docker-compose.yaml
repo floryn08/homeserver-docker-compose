@@ -201,7 +201,7 @@ services:
       PORT: 5000
       PUID: 1000
       PGID: 1000
-      PLAYWRIGHT_DRIVER_URL: ws://chrome:8089/?stealth=1&--disable-web-security=true
+      PLAYWRIGHT_DRIVER_URL: ws://chrome:3000/?stealth=1&--disable-web-security=true
     volumes:
       - ${VOLUMES_PATH}/utility-services/changedetection:/datastore
     ports:
@@ -213,7 +213,5 @@ services:
     container_name: chrome
     environment:
       - MAX_CONCURRENT_SESSIONS=10
-    ports:
-      - 8089:3000
     restart: unless-stopped
     
