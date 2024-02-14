@@ -18,7 +18,6 @@
     },
     {
       "packagePatterns": ["^linuxserver\\/qbittorrent"],
-      "versionScheme": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$",
       "allowedVersions": "/^\\d\\.\\d+\\.\\d+$/"
     },
     {
