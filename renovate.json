@@ -19,7 +19,7 @@
     {
       "packagePatterns": ["^linuxserver\\/qbittorrent"],
       "versionScheme": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$",
-      "allowedVersions": "/^(\\d{1}\\.)(\\d*\\.)*\\d{1,3}$/"
+      "allowedVersions": "/^\\d\\.\\d+\\.\\d+$/"
     },
     {
       "packagePatterns": ["^mcuadros\\/ofelia"],
