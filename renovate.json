@@ -3,6 +3,9 @@
   "extends": [
     "config:base"
   ],
+  "assignees": [
+    "floryn08"
+  ]
   "packageRules": [
     {
       "packagePatterns": ["^linuxserver\\/", "^hotio\\/"],
