@@ -5,7 +5,7 @@
   ],
   "assignees": [
     "floryn08"
-  ]
+  ],
   "packageRules": [
     {
       "packagePatterns": ["^linuxserver\\/", "^hotio\\/"],
