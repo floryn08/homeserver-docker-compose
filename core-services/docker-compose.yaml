@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
 
   traefik:
-    image: traefik:2.10.7
+    image: traefik:2.11.0
     container_name: traefik
     command:
       - --log.level=DEBUG
@@ -74,7 +74,7 @@ services:
       retries: 5
       
   postgres:
-    image: postgres:16.1-alpine
+    image: postgres:16.2-alpine
     container_name: postgres
     user: "1000:1000"
     environment:
@@ -95,7 +95,7 @@ services:
       retries: 5
 
   pgadmin:
-    image: dpage/pgadmin4:8.2
+    image: dpage/pgadmin4:8.3
     container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
