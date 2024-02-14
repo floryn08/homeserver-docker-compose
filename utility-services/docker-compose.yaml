@@ -207,3 +207,12 @@ services:
       - 5000:5000
     restart: unless-stopped
     
+  chrome:
+    image: browserless/chrome:latest
+    container_name: chrome
+    environment:
+      - MAX_CONCURRENT_SESSIONS=10
+    ports:
+      - 8089:3000
+    restart: unless-stopped
+    
