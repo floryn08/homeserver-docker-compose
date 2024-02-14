@@ -98,7 +98,7 @@ Create networks with `docker network create <network_name>`
       <td>bazarr</td>
    </tr>
    <tr>
-      <td>deluge</td>
+      <td>qbittorrent</td>
    </tr>
    <tr>
       <td>jellyfin</td>
@@ -148,6 +148,12 @@ Create networks with `docker network create <network_name>`
    </tr>
    <tr>
       <td>paperless-ngx</td>
+   </tr>
+   <tr>
+      <td>changedetection</td>
+   </tr>
+   <tr>
+      <td>chrome</td>
    </tr>
 </table>
 
