@@ -8,15 +8,15 @@
   ],
   "packageRules": [
     {
-      "packagePatterns": ["^linuxserver\\/", "^hotio\\/"],
+      "packagePatterns": ["^.+\/linuxserver\\/", "^hotio\\/"],
       "versionScheme": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$"
     },
     {
-      "packagePatterns": ["^linuxserver\\/prowlarr"],
+      "packagePatterns": ["^.+\/linuxserver\\/prowlarr"],
       "allowedVersions": "/^(\\d{1,3}\\.)(\\d*\\.)*\\d{1,3}$/"
     },
     {
-      "packagePatterns": ["^lscr.io\\/linuxserver\\/qbittorrent"],
+      "packagePatterns": ["^.+\/linuxserver\\/qbittorrent"],
       "allowedVersions": "/^\\d\\.\\d+\\.\\d+$/"
     },
     {
@@ -24,7 +24,7 @@
       "allowedVersions": "/^(\\?\\!3)(\\d*\\.)*\\d{1,3}$/"
     },
     {
-      "packagePatterns": ["^linuxserver\\/tvheadend"],
+      "packagePatterns": ["^.+\/linuxserver\\/tvheadend"],
       "versionScheme": "regex:^arm64v8-(?<compatibility>)?.*-ls(?<minor>\\d+)?$"
     },
     {
