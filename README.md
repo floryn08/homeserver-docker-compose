@@ -125,7 +125,7 @@ Create networks with `docker network create <network_name>`
       <td>sabnzbd</td>
    </tr>
    <tr>
-      <td rowspan="8">Utility Services</td>
+      <td rowspan="10">Utility Services</td>
       <td>pihole</td>
    </tr>
    <tr>
