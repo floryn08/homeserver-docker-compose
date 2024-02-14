@@ -201,6 +201,7 @@ services:
       PORT: 5000
       PUID: 1000
       PGID: 1000
+      PLAYWRIGHT_DRIVER_URL: ws://chrome:8089/?stealth=1&--disable-web-security=true
     volumes:
       - ${VOLUMES_PATH}/utility-services/changedetection:/datastore
     ports:
