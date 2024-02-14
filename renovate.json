@@ -12,9 +12,14 @@
       "versionScheme": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$"
     },
     {
-      "packagePatterns": ["^linuxserver\\/prowlarr", "^linuxserver\\/qbittorrent"],
+      "packagePatterns": ["^linuxserver\\/prowlarr"],
       "versionScheme": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$",
       "allowedVersions": "/^(\\d{1,3}\\.)(\\d*\\.)*\\d{1,3}$/"
+    },
+    {
+      "packagePatterns": ["^linuxserver\\/qbittorrent"],
+      "versionScheme": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$",
+      "allowedVersions": "/^(\\d{1}\\.)(\\d*\\.)*\\d{1,3}$/"
     },
     {
       "packagePatterns": ["^mcuadros\\/ofelia"],
@@ -51,7 +56,7 @@
       "groupSlug": "ai-services"
     },
     {
-      "matchFileNames": ["gamse-servers/docker-compose.yaml"],
+      "matchFileNames": ["game-servers/docker-compose.yaml"],
       "groupName": "Game Servers",
       "groupSlug": "gamse-servers"
     }
