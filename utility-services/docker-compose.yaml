@@ -17,7 +17,7 @@ services:
 
   pihole:
     container_name: pihole
-    image: pihole/pihole:2024.01.0
+    image: pihole/pihole:2024.02.0
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -134,7 +134,7 @@ services:
       start_period: 20s
       
   speedtest-tracker:
-    image: ghcr.io/alexjustesen/speedtest-tracker:v0.15.3
+    image: ghcr.io/alexjustesen/speedtest-tracker:v0.15.4
     container_name: speedtest-tracker
     environment:
       PUID: 1000
@@ -169,7 +169,7 @@ services:
     restart: unless-stopped
 
   paperless-ngx:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.5.1
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.5.2
     container_name: paperless-ngx
     environment:
       USERMAP_UID: 1000
