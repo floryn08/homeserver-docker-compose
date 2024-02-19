@@ -134,7 +134,7 @@ services:
       start_period: 20s
       
   speedtest-tracker:
-    image: ghcr.io/alexjustesen/speedtest-tracker:v0.15.4
+    image: ghcr.io/alexjustesen/speedtest-tracker:v0.15.5
     container_name: speedtest-tracker
     environment:
       PUID: 1000
@@ -169,7 +169,7 @@ services:
     restart: unless-stopped
 
   paperless-ngx:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.5.2
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.5.3
     container_name: paperless-ngx
     environment:
       USERMAP_UID: 1000
