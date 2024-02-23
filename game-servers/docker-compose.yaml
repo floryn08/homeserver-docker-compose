@@ -46,7 +46,7 @@ services:
       SERVER_NAME: ${SERVER_NAME}
       WORLD_NAME: ${SERVER_NAME}
       SERVER_PASS: ${SERVER_PASSWORD}
-      SERVER_PUBLIC: false
+      SERVER_PUBLIC: true
       SUPERVISOR_HTTP: false
       SERVER_ARGS: -crossplay
       ADMINLIST_IDS: ${VALHEIM_ADMINS}
