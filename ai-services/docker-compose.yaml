@@ -12,7 +12,7 @@ services:
 
     ollama-webui:
       container_name: ollama-webui
-      image: ghcr.io/ollama-webui/ollama-webui:main
+      image: ghcr.io/open-webui/open-webui:main
       volumes:
         - ${VOLUMES_PATH}/ai-services/ollama-webui:/app/backend/data
       environment:
