@@ -17,7 +17,7 @@ services:
 
   pihole:
     container_name: pihole
-    image: pihole/pihole:2024.02.0
+    image: pihole/pihole:2024.02.2
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -110,7 +110,7 @@ services:
     
   scrutiny:
     container_name: scrutiny
-    image: ghcr.io/analogj/scrutiny:v0.7.2-omnibus
+    image: ghcr.io/analogj/scrutiny:v0.7.3-omnibus
     cap_add:
       - SYS_RAWIO
     ports:
@@ -175,7 +175,7 @@ services:
     restart: unless-stopped
 
   paperless-ngx:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.5.3
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.5.4
     container_name: paperless-ngx
     environment:
       USERMAP_UID: 1000
