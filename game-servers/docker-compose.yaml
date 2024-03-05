@@ -13,7 +13,7 @@ services:
       EULA: true
       SERVER_NAME: ${SERVER_NAME}
       MOTD: ${MOTD}
-      ONLINE_MODE: false
+      ONLINE_MODE: ${ONLINE_MODE}
       MAX_MEMORY: 8G
       OVERRIDE_SERVER_PROPERTIES: true
       ENABLE_AUTOPAUSE: true
