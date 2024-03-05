@@ -26,6 +26,7 @@ services:
       VIEW_DISTANCE: ${MINECRAFT_VIEW_DISTANCE}
       WHITELIST: ${MINECRAFT_WHITELIST}
       OPS: ${MINECRAFT_OPS}
+      DIFFICULTY: ${MINECRAFT_DIFFICULTY}
     volumes:
       - ${VOLUMES_PATH}/game-servers/minecraft:/data
       - /etc/localtime:/etc/localtime:ro 
