@@ -52,7 +52,7 @@ services:
       - WG_DEFAULT_DNS=172.30.0.100 # ip address of pihole from above
       # - WG_ALLOWED_IPS=192.168.0.0/24, 0.0.0.0/0, ::/0
 
-    image: ghcr.io/wg-easy/wg-easy:11
+    image: ghcr.io/wg-easy/wg-easy:12
     container_name: wireguard
     volumes:
       - ${VOLUMES_PATH}/utility-services/wireguard:/etc/wireguard
