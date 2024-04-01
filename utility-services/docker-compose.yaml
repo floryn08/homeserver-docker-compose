@@ -17,7 +17,7 @@ services:
 
   pihole:
     container_name: pihole
-    image: pihole/pihole:2024.02.2
+    image: pihole/pihole:2024.03.2
     ports:
       - "53:53/tcp"
       - "53:53/udp"
@@ -72,7 +72,7 @@ services:
       - services
 
   vaultwarden:
-    image: vaultwarden/server:1.30.3
+    image: vaultwarden/server:1.30.5
     container_name: vaultwarden
     restart: unless-stopped
     environment:
@@ -110,7 +110,7 @@ services:
     
   scrutiny:
     container_name: scrutiny
-    image: ghcr.io/analogj/scrutiny:v0.7.3-omnibus
+    image: ghcr.io/analogj/scrutiny:v0.8.0-omnibus
     cap_add:
       - SYS_RAWIO
     ports:
@@ -134,7 +134,7 @@ services:
       start_period: 20s
       
   speedtest-tracker:
-    image: ghcr.io/alexjustesen/speedtest-tracker:v0.17.2
+    image: ghcr.io/alexjustesen/speedtest-tracker:v0.18.5
     container_name: speedtest-tracker
     environment:
       PUID: 1000
@@ -161,7 +161,7 @@ services:
       timeout: 10s
     
   homepage:
-    image: ghcr.io/gethomepage/homepage:v0.8.8
+    image: ghcr.io/gethomepage/homepage:v0.8.10
     container_name: homepage
     environment:
       - TZ=${TIMEZONE}
@@ -175,7 +175,7 @@ services:
     restart: unless-stopped
 
   paperless-ngx:
-    image: ghcr.io/paperless-ngx/paperless-ngx:2.5.4
+    image: ghcr.io/paperless-ngx/paperless-ngx:2.6.3
     container_name: paperless-ngx
     environment:
       USERMAP_UID: 1000
@@ -201,7 +201,7 @@ services:
       retries: 5
 
   changedetection:
-    image: ghcr.io/dgtlmoon/changedetection.io:0.45.14
+    image: ghcr.io/dgtlmoon/changedetection.io:0.45.17
     container_name: changedetection
     environment:
       PORT: 5000
