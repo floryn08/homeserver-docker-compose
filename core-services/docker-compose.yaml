@@ -95,7 +95,7 @@ services:
       retries: 5
 
   pgadmin:
-    image: dpage/pgadmin4:8.3
+    image: dpage/pgadmin4:8.4
     container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
@@ -138,7 +138,7 @@ services:
     #   retries: 5
       
   filebrowser:
-    image: filebrowser/filebrowser:v2.27.0
+    image: filebrowser/filebrowser:v2.28.0
     container_name: filebrowser
     volumes:
       - ${VOLUMES_PATH}/core-services/filebrowser/database.db:/database.db
@@ -194,7 +194,7 @@ services:
       retries: 5
     
   cloudflare:
-    image: cloudflare/cloudflared:2024.2.1
+    image: cloudflare/cloudflared:2024.3.0
     container_name: cloudflare
     environment:
       - PUID=1000
