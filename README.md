@@ -1,5 +1,10 @@
 # homeserver-docker-compose
 
+## Archived ⚠️
+I no longer use this deployment stack for my homeserver and I am archiving it.
+I am currently learning and fidgeting with kubernetes and gitops concepts and I'm working on converting this repo to helm charts to deploy in a k3s cluster. 
+I will make the helm charts repository public when it is ready.
+
 ## Run with docker-compose
 1. Rename `.env.example` to `.env`
 2. Configure your env variables
